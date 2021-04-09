@@ -26,3 +26,12 @@ export function validUsername(str) {
 export function validEmailAddr(str) {
   return true
 }
+
+/**
+ * 验证密码强度
+ * @param {string}str
+ * @returns {boolean}
+ */
+export function validPassword(str) {
+  return true
+}

@@ -74,7 +74,7 @@ import { validEmailAddr } from '@/utils/validate'
 
 export default {
   name: 'Login',
-  data: () => {
+  data() {
     const validateEmail = (rule, value, callback) => {
       if (!validEmailAddr(value)) {
         callback(new Error('邮箱格式不正确'))
@@ -84,14 +84,14 @@ export default {
     }
     const validatePassword = (rule, value, callback) => {
       if (value.length < 6) {
-        callback(new Error('The password can not be less than 6 digits'))
+        callback(new Error('密码不能少于6位'))
       } else {
         callback()
       }
     }
     const validatePhone = (rule, value, callback) => {
       if (value.length !== 11) {
-        callback(new Error('The phone number must be 11 digits'))
+        callback(new Error('手机号码必须是11位'))
       } else {
         callback()
       }
