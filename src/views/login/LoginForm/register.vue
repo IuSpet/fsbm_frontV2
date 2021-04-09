@@ -134,7 +134,8 @@ export default {
         password: [{ required: true, trigger: 'blur', validator: validatePassword }],
         passwordCheck: [{ required: true, trigger: 'blur', validator: validatePasswordCheck }],
         age: [{ required: true, message: '年龄不能为空' }, { type: 'number', message: '年龄必须为数字值' }]
-      }
+      },
+      loading: false
     }
   },
   methods: {
