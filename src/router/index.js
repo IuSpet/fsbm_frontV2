@@ -33,7 +33,7 @@ import Layout from '@/layout'
 export const constantRoutes = [
   {
     path: '/demo',
-    component: () => import('@/views/login/index'),
+    component: () => import('@/views/admin/registerStats/index'),
     hidden: true
   },
   {
@@ -58,6 +58,22 @@ export const constantRoutes = [
       component: () => import('@/views/dashboard/index'),
       meta: { title: 'Dashboard', icon: 'dashboard' }
     }]
+  },
+
+  {
+    path: '/admin',
+    component: Layout,
+    redirect: '/example/registerStats',
+    name: 'admin',
+    meta: { title: 'admin', icon: '' },
+    children: [
+      {
+        path: 'stats',
+        name: 'stats',
+        component:()=>import('@/views/admin/registerStats/index'),
+        meta: { title: '注册用户统计', icon: '' }
+      }
+    ]
   },
 
   {
