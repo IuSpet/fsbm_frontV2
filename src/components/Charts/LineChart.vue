@@ -27,11 +27,11 @@ export default {
     },
     minDate: {
       type: String,
-      default: ''
+      default: '2021-01-01'
     },
     maxDate: {
       type: String,
-      default: ''
+      default: '2021-01-07'
     }
   },
   data() {

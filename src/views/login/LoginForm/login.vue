@@ -101,7 +101,8 @@ export default {
         email: '',
         password: '',
         phone: '',
-        verificationCode: ''
+        verificationCode: '',
+        way: 0
       },
       loginRules: {
         email: [{ required: true, trigger: 'blur', validator: validateEmail }],
@@ -114,9 +115,32 @@ export default {
       loading: false
     }
   },
+  computed: {
+    loginWay() {
+      if (this.byPassword) return 0
+      if (this.byEmail) return 1
+      if (this.byPhone) return 2
+    }
+  },
   methods: {
     // 处理登录请求，先验证表单内容，再发送请求
     handleLogin() {
+      this.$refs.loginForm.validate(valid => {
+        if (valid) {
+          this.loading = true
+          this.loginForm.way = this.loginWay
+          this.$store.dispatch('user/login', this.loginForm).then(() => {
+            this.$router.push({ path: this.redirect || '/' })
+            this.loading = false
+          }).catch(() => {
+            this.$router.push({ path: this.redirect || '/' })
+            this.loading = false
+          })
+        } else {
+          console.log('error submit!!')
+          return false
+        }
+      })
     },
     // 切换邮箱登录
     switchEmailLogin() {

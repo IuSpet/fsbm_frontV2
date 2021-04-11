@@ -63,16 +63,16 @@ export const constantRoutes = [
   {
     path: '/admin',
     component: Layout,
-    redirect: '/example/registerStats',
+    redirect: '/admin/registerStats',
     name: 'admin',
-    meta: { title: 'admin', icon: '' },
+    meta: { title: '管理员', icon: '' },
     children: [
       {
         path: 'stats',
         name: 'stats',
         component:()=>import('@/views/admin/registerStats/index'),
         meta: { title: '注册用户统计', icon: '' }
-      }
+      },
     ]
   },
 
