@@ -33,7 +33,7 @@ import Layout from '@/layout'
 export const constantRoutes = [
   {
     path: '/demo',
-    component: () => import('@/views/admin/registerStats/index'),
+    component: () => import('@/components/form/UserTableForm'),
     hidden: true
   },
   {
@@ -69,10 +69,16 @@ export const constantRoutes = [
     children: [
       {
         path: 'stats',
-        name: 'stats',
-        component:()=>import('@/views/admin/registerStats/index'),
+        name: 'Stats',
+        component: () => import('@/views/admin/registerStats/index'),
         meta: { title: '注册用户统计', icon: '' }
       },
+      {
+        path: 'userList',
+        name: 'UserList',
+        component: () => import('@/views/admin/userTable/index'),
+        meta: { title: '用户列表', icon: '' }
+      }
     ]
   },
 
