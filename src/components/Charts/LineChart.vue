@@ -5,6 +5,7 @@
 <script>
 import * as echarts from 'echarts'
 import resize from './mixins/resize'
+import { getUserRegisterInfo } from '@/api/admin'
 
 export default {
   mixins: [resize],
@@ -40,6 +41,14 @@ export default {
       registerData: {
         xAxis: [],
         yAxis: []
+      }
+    }
+  },
+  computed: {
+    header() {
+      return {
+        email: this.$store.state.user.email,
+        token: this.$store.state.user.token
       }
     }
   },
@@ -221,6 +230,17 @@ export default {
     },
     queryData() {
       //todo:查询统计人数
+      const data = {
+        create_begin: this.minDate,
+        create_end: this.maxDate
+      }
+      const headers = {
+        'Access-Email': this.header.email,
+        'Access-Token': this.header.token
+      }
+      getUserRegisterInfo(headers, data).then(rsp => {
+        //todo:用户注册返回
+      })
     }
   }
 }
