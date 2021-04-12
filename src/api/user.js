@@ -9,6 +9,14 @@ export function mockLogin(data) {
   })
 }
 
+export function register(data) {
+  return request({
+    url: Url.user.register,
+    method: 'post',
+    data
+  })
+}
+
 export function login0(data) {
   return request({
     url: Url.user.loginByPassword,
@@ -20,6 +28,38 @@ export function login0(data) {
 export function login1(data) {
   return request({
     url: Url.user.loginByVerificationCode,
+    method: 'post',
+    data
+  })
+}
+
+export function modifyUserProfile(data) {
+  return request({
+    url: Url.user.modify,
+    method: 'post',
+    data
+  })
+}
+
+export function deleteUser(data) {
+  return request({
+    url: Url.user.delete,
+    method: 'post',
+    data
+  })
+}
+
+export function applyRole(data) {
+  return request({
+    url: Url.user.applyRole,
+    method: 'post',
+    data
+  })
+}
+
+export function getUserProfile(data) {
+  return request({
+    url: Url.user.getProfile,
     method: 'post',
     data
   })
@@ -39,3 +79,4 @@ export function logout() {
     method: 'post'
   })
 }
+

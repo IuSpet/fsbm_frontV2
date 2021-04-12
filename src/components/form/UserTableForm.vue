@@ -10,8 +10,11 @@
       <el-form-item label="年龄">
         <el-input clearable v-model="form.age"/>
       </el-form-item>
+      <el-form-item label="手机号">
+        <el-input clearable v-model="form.phone"/>
+      </el-form-item>
       <el-form-item label="性别">
-        <el-select clearable v-model="form.sex">
+        <el-select clearable v-model="form.gender">
           <el-option label="男" value="1"/>
           <el-option label="女" value="2"/>
           <el-option label="其他" value="0"/>
@@ -44,8 +47,9 @@ export default {
         name: '',
         email: '',
         age: null,
-        sex: null,
-        registerRange: ''
+        gender: null,
+        registerRange: '',
+        phone: ''
       },
       pickerOptions: {
         shortcuts: [{
