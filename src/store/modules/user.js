@@ -1,5 +1,5 @@
 import { mockLogin, login0, login1, logout, getInfo } from '@/api/user'
-import { getToken, setToken, removeToken, setEmail } from '@/utils/auth'
+import { getToken, setToken, removeToken, setEmail, getEmail } from '@/utils/auth'
 import { resetRouter } from '@/router'
 import de from 'element-ui/src/locale/lang/de'
 
@@ -8,7 +8,7 @@ const getDefaultState = () => {
     token: getToken(),
     name: '',
     avatar: '',
-    email: ''
+    email: getEmail()
   }
 }
 

@@ -177,6 +177,19 @@ export const constantRoutes = [
   },
 
   {
+    path: '/profile',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/profile/index'),
+        name: 'Profile',
+        meta: { title: '用户资料', icon: '' }
+      }
+    ]
+  },
+
+  {
     path: 'external-link',
     component: Layout,
     children: [

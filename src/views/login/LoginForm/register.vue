@@ -42,18 +42,17 @@
           placeholder="年龄"
           name="age"
           auto-complete="off"
-        ></el-input>
+        />
       </el-form-item>
       <el-form-item>
         <span class="svg-container">
           <svg-icon icon-class="sex"/>
         </span>
-        <el-radio-group v-model="registerForm.sex">
-          <el-radio border label="男"/>
-          <el-radio border label="女"/>
-          <el-radio border label="其他"/>
+        <el-radio-group v-model="registerForm.gender">
+          <el-radio border label="男" value="1"/>
+          <el-radio border label="女" value="2"/>
+          <el-radio border label="其他" value="0"/>
         </el-radio-group>
-
       </el-form-item>
       <el-form-item prop="password">
         <span class="svg-container">
@@ -65,7 +64,6 @@
           placeholder="密码"
           type="password"
           name="password"
-          @keyup.enter.native=""
         ></el-input>
       </el-form-item>
       <el-form-item prop="passwordCheck">
@@ -78,7 +76,7 @@
           placeholder="再次输入密码"
           type="password"
           name="password"
-          @keyup.enter.native=""
+          @keyup.enter.native="handleRegister"
         ></el-input>
       </el-form-item>
       <el-button :loading="loading" type="primary" @click.native.prevent="handleRegister">注册</el-button>
@@ -87,6 +85,8 @@
 </template>
 <script>
 import { validEmailAddr, validPassword } from '@/utils/validate'
+import { getEmail } from '@/utils/auth'
+import { getUserProfile } from '@/api/user'
 
 export default {
   name: 'Register',
@@ -126,7 +126,7 @@ export default {
         password: '',
         passwordCheck: '',
         age: '',
-        sex: '其他'
+        gender: '其他'
       },
       registerRules: {
         email: [{ required: true, trigger: 'blur', validator: validateEmail }],

@@ -48,7 +48,7 @@ export default {
         email: '',
         age: null,
         gender: null,
-        registerRange: '',
+        registerRange: null,
         phone: ''
       },
       pickerOptions: {
