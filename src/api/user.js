@@ -65,6 +65,15 @@ export function getUserProfile(data) {
   })
 }
 
+export function getAvatar(data) {
+  return request({
+    url: Url.user.getAvatar,
+    method: 'post',
+    data,
+    // responseType: 'blob'
+  })
+}
+
 export function getInfo(token) {
   return request({
     url: '/vue-admin-template/user/info',

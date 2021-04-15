@@ -40,7 +40,7 @@
           placeholder="密码"
           type="password"
           name="password"
-          @keyup.enter.native=""
+          @keyup.enter.native="handleLogin"
         ></el-input>
       </el-form-item>
       <el-form-item prop="verificationCode" v-if="byEmail || byPhone">
@@ -53,7 +53,7 @@
           placeholder="验证码"
           type="text"
           name="verificationCode"
-          @keyup.enter.native=""
+          @keyup.enter.native="handleLogin"
         ></el-input>
       </el-form-item>
       <div class="login-form-button">
@@ -125,6 +125,7 @@ export default {
   methods: {
     // 处理登录请求，先验证表单内容，再发送请求
     handleLogin() {
+      console.log(this.$refs.loginForm)
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.loading = true

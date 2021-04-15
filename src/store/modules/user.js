@@ -1,7 +1,8 @@
-import { mockLogin, login0, login1, logout, getInfo } from '@/api/user'
+import { mockLogin, register, login0, login1, logout, getInfo, getAvatar } from '@/api/user'
 import { getToken, setToken, removeToken, setEmail, getEmail } from '@/utils/auth'
 import { resetRouter } from '@/router'
 import de from 'element-ui/src/locale/lang/de'
+import { MappingGender } from '@/utils'
 
 const getDefaultState = () => {
   return {
@@ -50,7 +51,7 @@ const actions = {
         break
       case 1:
         data = {
-          email: userInfo['email'].trim(),
+          email: userInfo['email'],
           verify_code: userInfo['verificationCode']
         }
     }
@@ -67,7 +68,29 @@ const actions = {
         })
       }
     )
+  },
 
+  register({ commit }, userInfo) {
+    let data = {
+      name: userInfo.name,
+      email: userInfo.email,
+      phone: userInfo.phone,
+      password: userInfo.password,
+      gender: MappingGender(userInfo.gender),
+      age: userInfo.age
+    }
+    return new Promise((resolve, reject) => {
+      register(data).then(rsp => {
+        const { data } = rsp
+        commit('SET_TOKEN', data.token)
+        commit('SET_EMAIL', data.email)
+        setToken(data.token)
+        setEmail(data.email)
+        resolve()
+      }).catch(error => {
+        reject(error)
+      })
+    })
   },
 
   mockLogin({ commit }, userInfo) {
@@ -106,6 +129,16 @@ const actions = {
     })
   },
 
+  getAvatar({ commit, state }) {
+    return new Promise((resolve, reject) => {
+      getAvatar({ email: state.email }).then(rsp => {
+
+      }).catch(err => {
+        reject(err)
+      })
+    })
+  },
+
 // user logout
   logout({ commit, state }) {
     return new Promise((resolve, reject) => {
@@ -118,8 +151,7 @@ const actions = {
         reject(error)
       })
     })
-  }
-  ,
+  },
 
 // remove token
   resetToken({ commit }) {

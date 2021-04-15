@@ -1,6 +1,10 @@
 <template>
   <div class="register-form-container">
-    <el-form ref="registerForm" :model="registerForm" :rules="registerRules" status-icon class="login-form"
+    <el-form ref="registerForm"
+             :model="registerForm"
+             :rules="registerRules"
+             status-icon
+             class="login-form"
              label-position="left"
     >
       <div class="register-title-container">
@@ -85,8 +89,6 @@
 </template>
 <script>
 import { validEmailAddr, validPassword } from '@/utils/validate'
-import { getEmail } from '@/utils/auth'
-import { getUserProfile } from '@/api/user'
 
 export default {
   name: 'Register',
@@ -140,7 +142,20 @@ export default {
   },
   methods: {
     handleRegister() {
-
+      this.$refs.registerForm.validate(valid => {
+        if (valid) {
+          this.loading = true
+          this.$store.dispatch('user/register', this.registerForm).then(() => {
+            this.$router.push({ path: this.redirect || '/' })
+            this.loading = false
+          }).catch(() => {
+            this.$router.push({ path: this.redirect || '/' })
+            this.loading = false
+          })
+        } else {
+          return false
+        }
+      })
     }
   }
 }

@@ -1,6 +1,5 @@
-/**
- * Created by PanJiaChen on 16/11/18.
- */
+const PwdRegex = new RegExp('(?=.*[0-9])(?=.*[a-zA-Z]).{8,30}')
+const EmailRegex = new RegExp('^[a-z0-9A-Z]+[-|a-z0-9A-Z._]+@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-z]{2,}$')
 
 /**
  * @param {string} path
@@ -24,7 +23,7 @@ export function validUsername(str) {
  * @returns {Boolean}
  */
 export function validEmailAddr(str) {
-  return true
+  return EmailRegex.test(str)
 }
 
 /**
@@ -33,5 +32,5 @@ export function validEmailAddr(str) {
  * @returns {boolean}
  */
 export function validPassword(str) {
-  return true
+  return PwdRegex.test(str)
 }

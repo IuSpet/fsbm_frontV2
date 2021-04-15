@@ -45,7 +45,9 @@ export function parseTime(time, cFormat) {
   const time_str = format.replace(/{([ymdhisa])+}/g, (result, key) => {
     const value = formatObj[key]
     // Note: getDay() returns 0 on Sunday
-    if (key === 'a') { return ['日', '一', '二', '三', '四', '五', '六'][value ] }
+    if (key === 'a') {
+      return ['日', '一', '二', '三', '四', '五', '六'][value]
+    }
     return value.toString().padStart(2, '0')
   })
   return time_str
@@ -157,7 +159,7 @@ export function debounce(func, wait, immediate) {
   }
 }
 
-export function DateFormat(fmt){
+export function DateFormat(fmt) {
   var o = {
     'M+': this.getMonth() + 1,                 //月份
     'd+': this.getDate(),                    //日
@@ -180,4 +182,15 @@ export function DateFormat(fmt){
   }
 
   return fmt
+}
+
+export function MappingGender(x) {
+  switch (x) {
+    case '男':
+      return 1
+    case '女':
+      return 2
+    default:
+      return 0
+  }
 }

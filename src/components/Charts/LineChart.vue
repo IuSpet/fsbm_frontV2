@@ -44,14 +44,6 @@ export default {
       }
     }
   },
-  computed: {
-    header() {
-      return {
-        email: this.$store.state.user.email,
-        token: this.$store.state.user.token
-      }
-    }
-  },
   created() {
     this.queryData()
   },
@@ -65,12 +57,15 @@ export default {
     this.chart.dispose()
     this.chart = null
   },
+  computed: {
+    changed() {
+      return this.minDate + this.maxDate
+    }
+  },
   methods: {
     initChart() {
       const dom = document.getElementById(this.id)
       this.chart = echarts.init(dom)
-      // const xData = this.registerData.xAxis
-      const yData = this.registerData.yAxis
       const xData = (function() {
         const data = []
         for (let i = 1; i < 13; i++) {
@@ -140,7 +135,7 @@ export default {
             interval: 0
 
           },
-          data: xData
+          data: this.xAxis
         }],
         yAxis: [{
           type: 'value',
@@ -192,7 +187,7 @@ export default {
         }],
         series: [
           {
-            name: 'average',
+            name: '注册人数',
             type: 'line',
             stack: 'total',
             symbolSize: 10,
@@ -210,37 +205,36 @@ export default {
                 }
               }
             },
-            data: [
-              1036,
-              3693,
-              2962,
-              3810,
-              2519,
-              1915,
-              1748,
-              4675,
-              6209,
-              4323,
-              2865,
-              4298
-            ]
+            data: this.yAxis
           }
         ]
       })
     },
     queryData() {
-      //todo:查询统计人数
       const data = {
         create_begin: this.minDate,
         create_end: this.maxDate
       }
-      const headers = {
-        'Access-Email': this.header.email,
-        'Access-Token': this.header.token
-      }
-      getUserRegisterInfo(headers, data).then(rsp => {
+      getUserRegisterInfo(data).then(rsp => {
         //todo:用户注册返回
+        const { data } = rsp
+        console.log(rsp)
+        if (data.series === null) {
+          this.xAxis = []
+          this.yAxis = []
+          return true
+        }
+        console.log(data.series)
+        this.xAxis = data.series.map(a => a['date'])
+        this.yAxis = data.series.map(a => a['cnt'])
+        return true
       })
+    }
+  },
+  watch: {
+    changed() {
+      this.queryData()
+      this.initChart()
     }
   }
 }

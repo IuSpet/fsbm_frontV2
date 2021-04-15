@@ -45,8 +45,8 @@
         <el-button :disabled="verification.hasSent" type="info" @click.native.prevent="handleSend">
           {{ verification.hasSent ? verification.left + '秒' : '发送验证码' }}
         </el-button>
-        <el-button :disabled="loading" type="warning" @click.native.prevent="handleModify">修改资料</el-button>
-        <el-button :disabled="loading" type="danger" @click.native.prevent="handleDelete">删除用户</el-button>
+        <el-button :loading="loading" type="warning" @click.native.prevent="handleModify">修改资料</el-button>
+        <el-button :loading="loading" type="danger" @click.native.prevent="handleDelete">删除用户</el-button>
       </div>
     </el-form>
   </div>
@@ -68,6 +68,10 @@ export default {
       }
     }
     const validatePassword = (rule, value, callback) => {
+      if (value.length === 0) {
+        callback()
+        return
+      }
       if (!validPassword(value)) {
         callback(new Error('密码需要包含字母数字'))
       } else {
@@ -75,7 +79,11 @@ export default {
       }
     }
     const validatePasswordCheck = (rule, value, callback) => {
-      if (value !== this.registerForm.password) {
+      if (this.form.password.length === 0){
+        callback()
+        return
+      }
+      if (value !== this.form.password) {
         callback(new Error('两次输入密码不同'))
       } else {
         callback()
@@ -93,9 +101,9 @@ export default {
       },
       formRules: {
         name: [{ required: true, trigger: 'blur', validator: validateUsername }],
-        password: [{ required: true, trigger: 'blur', validator: validatePassword }],
-        passwordCheck: [{ required: true, trigger: 'blur', validator: validatePasswordCheck }],
-        age: [{ required: true, message: '年龄不能为空' }, { type: 'number', message: '年龄必须为数字值' }]
+        password: [{ required: false, trigger: 'blur', validator: validatePassword }],
+        passwordCheck: [{ required: false, trigger: 'blur', validator: validatePasswordCheck }],
+        age: [{ required: false, message: '年龄不能为空' }, { type: 'number', message: '年龄必须为数字值' }]
       },
       loading: false,
       oldForm: null,
@@ -135,7 +143,7 @@ export default {
       setTimeout(() => {
         this.verification.hasSent = false
         clearInterval(id)
-      },60 * 1000)
+      }, 60 * 1000)
     },
     handleModify() {
 

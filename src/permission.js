@@ -3,7 +3,7 @@ import store from './store'
 import { Message } from 'element-ui'
 import NProgress from 'nprogress' // progress bar
 import 'nprogress/nprogress.css' // progress bar style
-import { getToken } from '@/utils/auth' // get token from cookie
+import { getEmail, getToken } from '@/utils/auth' // get token from cookie
 import getPageTitle from '@/utils/get-page-title'
 
 NProgress.configure({ showSpinner: false }) // NProgress Configuration
@@ -19,10 +19,12 @@ router.beforeEach(async(to, from, next) => {
 
   // determine whether the user has logged in
   const hasToken = getToken()
+  const hasEmail = getEmail()
 
-  if (hasToken) {
+  // 测试环境hack，免认证
+  if (hasToken && hasEmail) {
     if (to.path === '/login') {
-      // if is logged in, redirect to the home page
+      // 如果已经登录，重定向到首页
       next({ path: '/' })
       NProgress.done()
     } else {
@@ -32,7 +34,7 @@ router.beforeEach(async(to, from, next) => {
       } else {
         try {
           // get user info
-          await store.dispatch('user/getInfo')
+          // await store.dispatch('user/getAvatar')
 
           next()
         } catch (error) {
