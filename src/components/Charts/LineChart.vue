@@ -44,11 +44,12 @@ export default {
       }
     }
   },
-  created() {
-    this.queryData()
-  },
   mounted() {
-    this.initChart()
+    this.queryPromise().then(
+      () => {
+        this.initChart()
+      }
+    )
   },
   beforeDestroy() {
     if (!this.chart) {
@@ -66,13 +67,6 @@ export default {
     initChart() {
       const dom = document.getElementById(this.id)
       this.chart = echarts.init(dom)
-      const xData = (function() {
-        const data = []
-        for (let i = 1; i < 13; i++) {
-          data.push(i + 'month')
-        }
-        return data
-      }())
       this.chart.setOption({
         backgroundColor: '#ffffff',
         title: {
@@ -135,7 +129,7 @@ export default {
             interval: 0
 
           },
-          data: this.xAxis
+          data: this.registerData.xAxis
         }],
         yAxis: [{
           type: 'value',
@@ -205,7 +199,7 @@ export default {
                 }
               }
             },
-            data: this.yAxis
+            data: this.registerData.yAxis
           }
         ]
       })
@@ -215,26 +209,33 @@ export default {
         create_begin: this.minDate,
         create_end: this.maxDate
       }
-      getUserRegisterInfo(data).then(rsp => {
+      return getUserRegisterInfo(data).then(rsp => {
         //todo:用户注册返回
         const { data } = rsp
         console.log(rsp)
         if (data.series === null) {
-          this.xAxis = []
-          this.yAxis = []
+          this.registerData.xAxis = []
+          this.registerData.yAxis = []
           return true
         }
         console.log(data.series)
-        this.xAxis = data.series.map(a => a['date'])
-        this.yAxis = data.series.map(a => a['cnt'])
+        this.registerData.xAxis = data.series.map(a => a['date'])
+        this.registerData.yAxis = data.series.map(a => a['cnt'])
         return true
+      })
+    },
+    queryPromise() {
+      return new Promise(async(resolve) => {
+        await this.queryData()
+        resolve()
       })
     }
   },
   watch: {
     changed() {
-      this.queryData()
-      this.initChart()
+      this.queryPromise().then(() => {
+        this.initChart()
+      })
     }
   }
 }

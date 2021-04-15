@@ -194,3 +194,12 @@ export function MappingGender(x) {
       return 0
   }
 }
+
+export function MappingStatus(x) {
+  switch (x) {
+    case '正常':
+      return 0
+    case '已删除':
+      return 1
+  }
+}

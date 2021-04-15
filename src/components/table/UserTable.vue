@@ -1,13 +1,13 @@
 <template>
   <div class="user-table-container">
     <el-table
-      v-loading="dataLoading"
-      element-loading-text="Loading"
-      :data="tableData"
-      border
-      fit
-      highlight-current-row
-      style="width: 100%"
+        v-loading="dataLoading"
+        element-loading-text="Loading"
+        :data="tableData"
+        border
+        fit
+        highlight-current-row
+        style="width: 100%"
     >
       <el-table-column label="用户名" width="175" align="center">
         <template slot-scope="scope">
@@ -49,6 +49,8 @@
 </template>
 
 <script>
+import { MappingStatus } from '@/utils'
+
 export default {
   name: 'UserTable',
   props: {
@@ -64,15 +66,15 @@ export default {
   filters: {
     statusFilter(status) {
       const statusMap = {
-        published: 'success',
+        0: 'success',
         draft: 'gray',
-        deleted: 'danger'
+        1: 'danger'
       }
-      return statusMap[status]
+      return statusMap[MappingStatus(status)]
     }
   },
-  watch:{
-    tableData(){
+  watch: {
+    tableData() {
       console.log(12312312312)
       console.log(this.tableData)
     }
