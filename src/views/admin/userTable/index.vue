@@ -53,10 +53,10 @@ export default {
   data() {
     return {
       loading: false,
-      tableData: this.queryData({}),
+      tableData: [],
       currentPage: 1,
       pageSize: 10,
-      totalCnt: 100,
+      totalCnt: 0,
       form: null
     }
   },
@@ -74,14 +74,12 @@ export default {
      * @return {Array}
      */
     queryData(data) {
-      let res = []
       getUserList(data).then(rsp => {
-        //todo:处理返回结果
-        res = rsp
-      }).catch(err => {
-        res = null
+        const { data } = rsp
+        console.log(data)
+        this.tableData = data['user_info_list']
+        this.totalCnt = data['total_count']
       })
-      return res
     },
     handleQueryForm(form) {
       this.form = form
@@ -108,15 +106,16 @@ export default {
         email: this.form.email,
         phone: this.form.phone,
         create_begin: left,
-        create_end: right
+        create_end: right,
+        page: this.currentPage,
+        page_size: this.pageSize
       }
-      const tmp = this.queryData(data)
-      if (tmp) this.tableData = tmp
+      this.queryData(data)
     },
-    exportTable(){
+    exportTable() {
 
     },
-    printTable(){
+    printTable() {
 
     }
   }

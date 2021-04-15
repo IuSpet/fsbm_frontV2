@@ -70,6 +70,12 @@ export default {
       }
       return statusMap[status]
     }
+  },
+  watch:{
+    tableData(){
+      console.log(12312312312)
+      console.log(this.tableData)
+    }
   }
 }
 </script>
