@@ -5,7 +5,7 @@
         <el-input v-model="form.email" disabled/>
       </el-form-item>
       <el-form-item label="用户名" prop="name">
-        <el-input v-model="form.name" ref="email"/>
+        <el-input v-model="form.name" ref="name"/>
       </el-form-item>
       <el-form-item label="年龄" prop="age">
         <el-input v-model.number="form.age" ref="age" auto-complete="off"/>

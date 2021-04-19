@@ -98,6 +98,7 @@ export const constantRoutes = [
       {
         path: 'addShop',
         name: 'AddShop',
+        component: () => import('@/views/shop/addShop'),
         meta: { title: '注册店铺' }
       },
       {
