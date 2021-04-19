@@ -19,6 +19,9 @@ const Url = {
     userListCsv: '/admin/user_list/csv',
     userListPrint: '/admin/user_list/print',
     userRegister: '/admin/user_register/line_chart'
+  },
+  shop: {
+    shopList: ''
   }
 }
 

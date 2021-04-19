@@ -49,6 +49,7 @@ export default {
     if (Date.prototype.format === undefined) {
       Date.prototype.format = DateFormat
     }
+    this.queryTableData()
   },
   data() {
     return {
@@ -57,7 +58,14 @@ export default {
       currentPage: 1,
       pageSize: 10,
       totalCnt: 0,
-      form: null
+      form: {
+        name: '',
+        email: '',
+        age: null,
+        gender: null,
+        registerRange: null,
+        phone: ''
+      }
     }
   },
   computed: {
@@ -71,7 +79,6 @@ export default {
     /**
      * 查询用户列表数据
      * @param {Object}data
-     * @return {Array}
      */
     queryData(data) {
       getUserList(data).then(rsp => {
@@ -101,8 +108,8 @@ export default {
       }
       const data = {
         name: this.form.name,
-        gender: this.form.gender,
-        age: this.form.age,
+        gender: parseInt(this.form.gender),
+        age: parseInt(this.form.age),
         email: this.form.email,
         phone: this.form.phone,
         create_begin: left,
@@ -110,6 +117,7 @@ export default {
         page: this.currentPage,
         page_size: this.pageSize
       }
+      console.log(data)
       this.queryData(data)
     },
     exportTable() {

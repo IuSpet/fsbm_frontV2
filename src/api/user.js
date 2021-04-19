@@ -69,7 +69,7 @@ export function getAvatar(data) {
   return request({
     url: Url.user.getAvatar,
     method: 'post',
-    data,
+    data
     // responseType: 'blob'
   })
 }
@@ -84,7 +84,7 @@ export function getInfo(token) {
 
 export function logout() {
   return request({
-    url: '/vue-admin-template/user/logout',
+    url: Url.user.logout,
     method: 'post'
   })
 }

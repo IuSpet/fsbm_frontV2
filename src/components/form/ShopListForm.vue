@@ -1,24 +1,14 @@
 <template>
   <div class="form-main-container">
-    <el-form ref="form" :inline="true" :model="form" class="user-table-form">
-      <el-form-item label="用户名">
+    <el-form ref="form" :inline="true" :model="form" class="shop-table-form">
+      <el-form-item label="店铺名称">
         <el-input clearable v-model="form.name"/>
       </el-form-item>
-      <el-form-item label="邮箱">
-        <el-input clearable v-model="form.email"/>
+      <el-form-item label="负责人">
+        <el-input clearable v-model="form.admin"></el-input>
       </el-form-item>
-      <el-form-item label="年龄">
-        <el-input clearable v-model="form.age"/>
-      </el-form-item>
-      <el-form-item label="手机号">
-        <el-input clearable v-model="form.phone"/>
-      </el-form-item>
-      <el-form-item label="性别">
-        <el-select clearable v-model="form.gender">
-          <el-option label="男" value="1"/>
-          <el-option label="女" value="2"/>
-          <el-option label="其他" value="0"/>
-        </el-select>
+      <el-form-item label="地址">
+        <el-input clearable v-model="form.addr"></el-input>
       </el-form-item>
       <el-form-item label="注册时间">
         <el-date-picker v-model="form.registerRange"
@@ -32,7 +22,7 @@
         />
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="$emit('query-list',form)">查询</el-button>
+        <el-button type="primary" @click="$emit('query',form)">查询</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -40,16 +30,14 @@
 
 <script>
 export default {
-  name: 'UserTableForm',
+  name: 'ShopListForm',
   data() {
     return {
       form: {
-        name: '',
-        email: '',
-        age: null,
-        gender: null,
-        registerRange: null,
-        phone: ''
+        name: null,
+        admin: null,
+        addr: null,
+        registerRange: null
       },
       pickerOptions: {
         shortcuts: [{
@@ -84,7 +72,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.form-main-container{
+.form-main-container {
   padding: 10px 10px 0 20px;
 }
 </style>
