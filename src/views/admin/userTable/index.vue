@@ -1,7 +1,7 @@
 <template>
   <div>
     <user-table-form @query-list="handleQueryForm"/>
-    <user-table :data-loading="loading" :table-data="tableData"/>
+    <user-table :data-loading="loading" :table-data="tableData" @sort-change="handleSortChange"/>
     <div style="margin-top:5px;">
       <el-row :gutter="10">
         <el-col :span="6">
@@ -65,7 +65,8 @@ export default {
         gender: null,
         registerRange: null,
         phone: ''
-      }
+      },
+      sortFields: []
     }
   },
   computed: {
@@ -100,6 +101,10 @@ export default {
       this.currentPage = current
       this.queryTableData()
     },
+    handleSortChange(sortFilter) {
+      this.sortFields = sortFilter
+      this.queryTableData()
+    },
     queryTableData() {
       let left, right
       if (this.form.registerRange) {
@@ -115,7 +120,8 @@ export default {
         create_begin: left,
         create_end: right,
         page: this.currentPage,
-        page_size: this.pageSize
+        page_size: this.pageSize,
+        sort_fields: this.sortFields
       }
       console.log(data)
       this.queryData(data)

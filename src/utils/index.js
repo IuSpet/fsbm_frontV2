@@ -203,3 +203,13 @@ export function MappingStatus(x) {
       return 1
   }
 }
+
+/**
+ * 将单词首字母大写
+ * @param {string} word
+ * @return {string}
+ * @constructor
+ */
+export function UpperFirstLetter(word) {
+  return word.slice(0, 1).toUpperCase() + word.slice(1)
+}

@@ -1,3 +1,5 @@
+import { UpperFirstLetter } from '@/utils'
+
 export default {
   data(){
     return {
@@ -14,7 +16,7 @@ export default {
       if (order === null) {
         this.fieldsStyle[prop] = ''
         let index = this.sortFilter.findIndex(item => {
-          return item['field'] === prop
+          return item['field'] === UpperFirstLetter(prop)
         })
         if (index !== -1) {
           this.sortFilter.splice(index, 1)
@@ -22,10 +24,10 @@ export default {
       } else {
         this.fieldsStyle[prop] = order
         let index = this.sortFilter.findIndex(item => {
-          return item['field'] === prop
+          return item['field'] === UpperFirstLetter(prop)
         })
         if (index === -1) {
-          this.sortFilter.push({ field: prop, order: this.mappingOrder[order] })
+          this.sortFilter.push({ field: UpperFirstLetter(prop), order: this.mappingOrder[order] })
         } else {
           this.sortFilter[index].order = this.mappingOrder[order]
         }
