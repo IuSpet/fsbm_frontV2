@@ -21,7 +21,7 @@ const Url = {
     userRegister: '/admin/user_register/line_chart'
   },
   shop: {
-    shopList: '',
+    shopList: '/shop/shop_list',
     addShop: '/shop/add_shop'
   }
 }

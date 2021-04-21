@@ -110,9 +110,9 @@ export default {
       if (typeof this.form.latitude !== 'number' || typeof this.form.longitude !== 'number') {
         callback('经纬度必须是数字')
       } else if (this.form.latitude < -180 || this.form.latitude > 180) {
-        callback('经度范围-180到180')
-      } else if (this.form.longitude < -180 || this.form.longitude > 180) {
         callback('纬度范围-180到180')
+      } else if (this.form.longitude < -180 || this.form.longitude > 180) {
+        callback('经度范围-180到180')
       } else {
         callback()
       }

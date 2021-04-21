@@ -1,7 +1,7 @@
 <template>
   <div>
     <shop-list-form @query="handleQuery"/>
-    <shop-table :data-loading="loading" :table-data="tableData"/>
+    <shop-table :data-loading="loading" :table-data="tableData" @sort-change="handleSortChange"/>
     <TableBottom
       :total-cnt="totalCnt"
       @size-change="handleSizeChange"
@@ -17,6 +17,7 @@ import ShopListForm from '@/components/form/ShopListForm'
 import ShopTable from '@/components/table/ShopTable'
 import TableBottom from '@/components/tool/TableBottom'
 import { ShopList } from '@/api/shop'
+import { DateFormat } from '@/utils'
 
 export default {
   name: 'index',
@@ -24,6 +25,12 @@ export default {
     ShopListForm,
     ShopTable,
     TableBottom
+  },
+  created() {
+    if (Date.prototype.format === undefined) {
+      Date.prototype.format = DateFormat
+    }
+    this.queryData()
   },
   data() {
     return {
@@ -37,7 +44,8 @@ export default {
         registerRange: null
       },
       pageSize: 10,
-      page: 1
+      page: 1,
+      sortFields: []
     }
   },
   methods: {
@@ -53,6 +61,10 @@ export default {
       this.page = current
       this.queryData()
     },
+    handleSortChange(sortFilter) {
+      this.sortFields = sortFilter
+      this.queryData()
+    },
     handlePrint() {
 
     },
@@ -62,11 +74,27 @@ export default {
     execQuery(data) {
       ShopList(data).then(rsp => {
         const { data } = rsp
-        //todo:店铺列表数据处理
+        console.log(data)
+        this.tableData = data['list']
+        this.totalCnt = data['total_cnt']
       })
     },
     queryData() {
-      const data = {}
+      let left, right
+      if (this.form.registerRange) {
+        left = this.form.registerRange[0].format('yyyy-MM-dd hh:mm:ss')
+        right = this.form.registerRange[1].format('yyyy-MM-dd hh:mm:ss')
+      }
+      const data = {
+        name: this.form.name,
+        admin: this.form.admin,
+        addr: this.form.addr,
+        create_begin: left,
+        create_end: right,
+        page: this.page,
+        page_size: this.pageSize,
+        sort_fields: this.sortFields
+      }
       this.execQuery(data)
     }
   }
