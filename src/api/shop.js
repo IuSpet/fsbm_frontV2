@@ -8,3 +8,11 @@ export function ShopList(data) {
     data
   })
 }
+
+export function AddShop(data) {
+  return request({
+    method: 'post',
+    url: Url.shop.addShop,
+    data
+  })
+}

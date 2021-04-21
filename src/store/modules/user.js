@@ -58,6 +58,7 @@ const actions = {
     return new Promise((resolve, reject) => {
         login(data).then(rsp => {
           const { data } = rsp
+          console.log(data)
           commit('SET_TOKEN', data.token)
           commit('SET_EMAIL', data.email)
           setToken(data.token)

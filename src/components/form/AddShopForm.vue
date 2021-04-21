@@ -1,19 +1,24 @@
 <template>
   <div class="form-main-container">
-    <el-form ref="form" :model="form" label-width="80px">
-      <el-form-item label="店铺名称">
+    <el-form ref="form" :model="form" :rules="addRules" label-width="80px">
+      <el-form-item label="店铺名称" prop="name">
         <el-input
+          ref="name"
           v-model="form.name"
           maxlength="30"
           show-word-limit
         />
       </el-form-item>
-      <el-form-item label="店铺地址">
+      <el-form-item label="店铺地址" prop="addr">
         <el-input
           v-model="form.addr"
           maxlength="50"
           show-word-limit
         />
+      </el-form-item>
+      <el-form-item label="经纬度" prop="pos">
+        <el-input v-model.number="form.latitude" placeholder="经度" style="width: 120px; margin-right: 10px"/>
+        <el-input v-model.number="form.longitude" placeholder="纬度" style="width: 120px"/>
       </el-form-item>
       <el-form-item label="普通报警">
         <el-switch v-model="notice.info.switch" active-color="#13ce66" inactive-color="#ff4949"/>
@@ -82,10 +87,9 @@
         <el-input
           type="textarea"
           autosize
-          v-model="form.extra"
+          v-model="form.remark"
           maxlength="100"
           show-word-limit
-          @click.native.prevent="handleRegister"
         />
       </el-form-item>
     </el-form>
@@ -96,14 +100,30 @@
 </template>
 
 <script>
+import { AddShop } from '@/api/shop'
+import { validEmailAddr } from '@/utils/validate'
+
 export default {
   name: 'AddShopForm',
   data() {
+    const validatePos = (rule, value, callback) => {
+      if (typeof this.form.latitude !== 'number' || typeof this.form.longitude !== 'number') {
+        callback('经纬度必须是数字')
+      } else if (this.form.latitude < -180 || this.form.latitude > 180) {
+        callback('经度范围-180到180')
+      } else if (this.form.longitude < -180 || this.form.longitude > 180) {
+        callback('纬度范围-180到180')
+      } else {
+        callback()
+      }
+    }
     return {
       form: {
         name: null,
         addr: null,
-        extra: null
+        remark: null,
+        latitude: null,
+        longitude: null
       },
       notice: {
         info: {
@@ -130,13 +150,52 @@ export default {
       ],
       infoTip: '普通报警最短间隔1小时报警一次',
       warnTip: '危险报警最短间隔15分钟报警一次',
-      errorTip: '严重报警最短间隔1分钟报警一次'
+      errorTip: '严重报警最短间隔1分钟报警一次',
+      addRules: {
+        name: [{ required: true, trigger: 'blur', message: '请输入店铺名称' }],
+        addr: [{ required: true, trigger: 'blur', message: '请输入店铺地址' }],
+        pos: [{ required: true, trigger: 'blur', validator: validatePos }]
+      }
     }
   },
   methods: {
     handleRegister() {
-      // todo:店铺注册处理
-      console.log(this.form)
+      this.$refs.form.validate(valid => {
+        if (valid) {
+          this.execRegister()
+        } else {
+          console.log('validate fail')
+        }
+      })
+    },
+    execRegister() {
+      const data = JSON.stringify({
+        name: this.form.name,
+        addr: this.form.addr,
+        notice_cfg: {
+          info: {
+            is_on: this.notice.info.switch,
+            threshold: this.notice.info.threshold,
+            notice_device: this.notice.info.noticeRange
+          },
+          warn: {
+            is_on: this.notice.warn.switch,
+            threshold: this.notice.warn.threshold,
+            notice_device: this.notice.error.noticeRange
+          },
+          error: {
+            is_on: this.notice.error.switch,
+            threshold: this.notice.error.threshold,
+            notice_device: this.notice.error.noticeRange
+          }
+        },
+        remark: this.remark
+      })
+      AddShop(data).then(() => {
+          // 成功后跳转首页
+          this.$router.push({ path: this.redirect || '/' })
+        }
+      )
     }
   }
 }
