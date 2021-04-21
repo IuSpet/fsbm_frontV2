@@ -169,7 +169,7 @@ export default {
       })
     },
     execRegister() {
-      const data = JSON.stringify({
+      const data = {
         name: this.form.name,
         addr: this.form.addr,
         notice_cfg: {
@@ -190,7 +190,7 @@ export default {
           }
         },
         remark: this.remark
-      })
+      }
       AddShop(data).then(() => {
           // 成功后跳转首页
           this.$router.push({ path: this.redirect || '/' })
