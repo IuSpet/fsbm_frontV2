@@ -65,19 +65,19 @@ export const constantRoutes = [
     component: Layout,
     redirect: '/admin/stats',
     name: 'admin',
-    meta: { title: '管理员', icon: '' },
+    meta: { title: '管理员', icon: '', roles: ['admin'] },
     children: [
       {
         path: 'stats',
         name: 'Stats',
         component: () => import('@/views/admin/registerStats/index'),
-        meta: { title: '注册用户统计', icon: '' }
+        meta: { title: '注册用户统计', icon: '', roles: ['admin'] }
       },
       {
         path: 'userList',
         name: 'UserList',
         component: () => import('@/views/admin/userTable/index'),
-        meta: { title: '用户列表', icon: '' }
+        meta: { title: '用户列表', icon: '', roles: ['admin'] }
       }
     ]
   },
@@ -99,7 +99,7 @@ export const constantRoutes = [
         path: 'addShop',
         name: 'AddShop',
         component: () => import('@/views/shop/addShop'),
-        meta: { title: '注册店铺' }
+        meta: { title: '注册店铺', roles: ['admin', 'manager'] }
       },
       {
         path: 'monitorList',
@@ -109,7 +109,7 @@ export const constantRoutes = [
       {
         path: 'addMonitor',
         name: 'AddMonitor',
-        meta: { title: '注册监控' }
+        meta: { title: '注册监控', roles: ['admin', 'manager'] }
       }
     ]
   },

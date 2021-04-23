@@ -1,4 +1,4 @@
-import { mockLogin, register, login0, login1, logout, getInfo, getAvatar } from '@/api/user'
+import { mockLogin, register, login0, login1, logout, getInfo, getAvatar, getRoles } from '@/api/user'
 import { getToken, setToken, removeToken, setEmail, getEmail } from '@/utils/auth'
 import { resetRouter } from '@/router'
 import de from 'element-ui/src/locale/lang/de'
@@ -9,7 +9,8 @@ const getDefaultState = () => {
     token: getToken(),
     name: '',
     avatar: '',
-    email: getEmail()
+    email: getEmail(),
+    roles: []
   }
 }
 
@@ -30,6 +31,9 @@ const mutations = {
   },
   SET_EMAIL: (state, email) => {
     state.email = email
+  },
+  SET_ROLES: (state, roles) => {
+    state.roles = roles
   }
 }
 
@@ -160,6 +164,19 @@ const actions = {
       removeToken() // must remove  token  first
       commit('RESET_STATE')
       resolve()
+    })
+  },
+
+  // 用户角色
+  getRoles({ commit, state }) {
+    return new Promise((resolve, reject) => {
+      getRoles({ email: state.email }).then(rsp => {
+        const { data } = rsp
+        commit('SET_ROLES', data.roles)
+        resolve()
+      }).catch(error => {
+        reject(error)
+      })
     })
   }
 }

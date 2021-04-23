@@ -74,6 +74,14 @@ export function getAvatar(data) {
   })
 }
 
+export function getRoles(data) {
+  return request({
+    url: Url.user.getRoles,
+    method: 'post',
+    data
+  })
+}
+
 export function getInfo(token) {
   return request({
     url: '/vue-admin-template/user/info',

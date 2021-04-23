@@ -3,7 +3,7 @@ import store from './store'
 import { Message } from 'element-ui'
 import NProgress from 'nprogress' // progress bar
 import 'nprogress/nprogress.css' // progress bar style
-import { getEmail, getToken } from '@/utils/auth' // get token from cookie
+import { getEmail, getToken, HasAccessRole } from '@/utils/auth' // get token from cookie
 import getPageTitle from '@/utils/get-page-title'
 
 NProgress.configure({ showSpinner: false }) // NProgress Configuration
@@ -16,27 +16,29 @@ router.beforeEach(async(to, from, next) => {
 
   // set page title
   document.title = getPageTitle(to.meta.title)
+  const pageRoles = to.meta.roles
 
   // determine whether the user has logged in
   const hasToken = getToken()
   const hasEmail = getEmail()
 
-  // 测试环境hack，免认证
   if (hasToken && hasEmail) {
     if (to.path === '/login') {
       // 如果已经登录，重定向到首页
       next({ path: '/' })
       NProgress.done()
     } else {
-      const hasGetUserInfo = store.getters.name
-      if (hasGetUserInfo) {
+      // const hasGetUserInfo = store.getters.name
+      let userRoles = store.getters.roles
+      if (!userRoles) {
+        await store.dispatch('user/getRoles')
+        userRoles = store.getters.roles
+      }
+      if (HasAccessRole(userRoles, pageRoles)) {
         next()
       } else {
         try {
-          // get user info
-          // await store.dispatch('user/getAvatar')
-
-          next()
+          next('/404')
         } catch (error) {
           // remove token and go to login page to re-login
           await store.dispatch('user/resetToken')

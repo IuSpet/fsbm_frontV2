@@ -26,3 +26,26 @@ export function setEmail(email) {
 export function removeEmail() {
   return Cookies.remove(EmailKey)
 }
+
+
+/**
+ * 判断用户是否有页面权限
+ * @param {Array}userRoles
+ * @param {Array}pageRoles
+ * @return {boolean}
+ * @constructor
+ */
+export function HasAccessRole(userRoles,pageRoles){
+  if (!pageRoles){
+    return true
+  }
+  if (pageRoles.length === 0){
+    return true
+  }
+  for (let i of pageRoles){
+    for (let j of userRoles){
+      if (i === j) return true
+    }
+  }
+  return false
+}

@@ -233,7 +233,7 @@ export default {
   },
   watch: {
     changed() {
-      this.queryPromise().then(() => {
+      this.queryData().then(()=>{
         this.initChart()
       })
     }

@@ -9,7 +9,8 @@ const Url = {
     applyRole: '/user/apply_role',
     getProfile: '/user/get_profile',
     setAvatar: '/user/set_avatar',
-    getAvatar: '/user/get_avatar'
+    getAvatar: '/user/get_avatar',
+    getRoles: '/user/get_roles'
   },
   tool: {
     sendEmailCode: '/tool/no_auth/generate_verification_code'
