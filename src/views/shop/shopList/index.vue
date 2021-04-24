@@ -1,7 +1,7 @@
 <template>
   <div>
-    <shop-list-form @query="handleQuery"/>
-    <shop-table :data-loading="loading" :table-data="tableData" @sort-change="handleSortChange"/>
+    <shop-list-form @query="handleQuery" />
+    <shop-table :data-loading="loading" :table-data="tableData" @sort-change="handleSortChange" />
     <TableBottom
       :total-cnt="totalCnt"
       @size-change="handleSizeChange"
@@ -20,17 +20,11 @@ import { ShopList } from '@/api/shop'
 import { DateFormat } from '@/utils'
 
 export default {
-  name: 'index',
+  name: 'ShopList',
   components: {
     ShopListForm,
     ShopTable,
     TableBottom
-  },
-  created() {
-    if (Date.prototype.format === undefined) {
-      Date.prototype.format = DateFormat
-    }
-    this.queryData()
   },
   data() {
     return {
@@ -47,6 +41,12 @@ export default {
       page: 1,
       sortFields: []
     }
+  },
+  created() {
+    if (Date.prototype.format === undefined) {
+      Date.prototype.format = DateFormat
+    }
+    this.queryData()
   },
   methods: {
     handleQuery(form) {

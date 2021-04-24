@@ -33,7 +33,7 @@ import Layout from '@/layout'
 export const constantRoutes = [
   {
     path: '/demo',
-    component: () => import('@/components/form/UserTableForm'),
+    component: () => import('@/views/dashboard/map/map'),
     hidden: true
   },
   {
