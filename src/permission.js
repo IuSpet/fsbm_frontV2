@@ -22,7 +22,7 @@ router.beforeEach(async(to, from, next) => {
   const hasToken = getToken()
   const hasEmail = getEmail()
 
-  if (hasToken && hasEmail) {
+  if (hasToken && hasEmail || true) {
     if (to.path === '/login') {
       // 如果已经登录，重定向到首页
       next({ path: '/' })
