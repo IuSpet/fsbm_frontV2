@@ -2,22 +2,21 @@
   <div class="map-container">
     <baidu-map
       class="bm-view"
-      :center="center.name"
+      :center="center"
       :ak="ak"
       :zoom="15"
       :map-style="mapStyle"
       :scroll-wheel-zoom="true"
+      :map-click="false"
     >
-      <bm-marker v-for="shop in shopList" :key="shop.id" :position="shop.pos" @click="handleClick">
-        <bm-info-window :show="shop.show">
+      <bm-city-list anchor="BMAP_ANCHOR_TOP_LEFT"/>
+      <bm-marker v-for="(shop,index) in shopList" :key="shop.id" :position="shop.pos" @click="handleClick(index)">
+        <bm-info-window :show="shop.show" @close="handleClose(index)" @open="handleClick(index)">
           <h4>{{ shop.name }}</h4>
           <p>负责人{{ shop.manager }}</p>
           <p>联系电话:{{ shop.phone }}</p>
-          <el-button>详细信息</el-button>
+          <el-button @click="handleDetail(shop.id)">详细信息</el-button>
         </bm-info-window>
-      </bm-marker>
-      <bm-marker :position="shop1" :click="handleOpen">
-        <bm-info-window :show="show" @close="handleClose" @open="handleOpen">这是一个店铺</bm-info-window>
       </bm-marker>
     </baidu-map>
   </div>
@@ -27,28 +26,19 @@
 import BaiduMap from 'vue-baidu-map/components/map/Map'
 import BmMarker from 'vue-baidu-map/components/overlays/Marker'
 import BmInfoWindow from 'vue-baidu-map/components/overlays/InfoWindow'
+import BmCityList from 'vue-baidu-map/components/controls/CityList'
 
 export default {
   components: {
     BaiduMap,
     BmMarker,
-    BmInfoWindow
-  },
-  props: {
-    center: {
-      type: Object,
-      default: () => {
-        return {
-          name: '北京',
-          lat: 0,
-          lng: 0
-        }
-      }
-    }
+    BmInfoWindow,
+    BmCityList
   },
   data() {
     return {
       ak: 'dZ76X6chZrtpTrtoPakDawZv9rIp4hHm',
+      center: '北京',
       mapStyle: {
         styleJson: [
           {
@@ -82,14 +72,14 @@ export default {
     initShopPoints() {
 
     },
-    handleClick() {
-
+    handleClick(index) {
+      this.shopList[index].show = true
     },
-    handleOpen() {
-      this.show = true
+    handleClose(index) {
+      this.shopList[index].show = false
     },
-    handleClose() {
-      this.show = false
+    handleDetail(id) {
+      this.$router.push({ path: '/shop_detail', query: { id } })
     }
   }
 }
