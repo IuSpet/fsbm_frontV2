@@ -1,30 +1,44 @@
 <template>
   <div class="dashboard-container">
-    <div class="dashboard-text">name: {{ name }}</div>
+    <div class="info-container">
+      <panel-group @handleSetLineChartData="" />
+    </div>
+    <div class="map-container">
+      <shop-map/>
+    </div>
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import ShopMap from '@/components/map/map'
+import PanelGroup from '@/components/card/PanelGroup'
 
 export default {
   name: 'Dashboard',
-  computed: {
-    ...mapGetters([
-      'name'
-    ])
+  components: {
+    ShopMap,
+    PanelGroup
+  },
+  data() {
+    return {}
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.dashboard {
-  &-container {
-    margin: 30px;
+.dashboard-container {
+  padding: 10px;
+  width: 100%;
+  height: calc(100vh - 60px);
+
+  .info-container {
+    width: 100%;
+    height: 20%;
   }
-  &-text {
-    font-size: 30px;
-    line-height: 46px;
+
+  .map-container {
+    width: 100%;
+    height: 100%;
   }
 }
 </style>
