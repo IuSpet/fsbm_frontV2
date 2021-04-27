@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import ShopMap from '@/components/map/map'
+import ShopMap from '@/components/map/ShopMap'
 import PanelGroup from '@/components/card/PanelGroup'
 
 export default {

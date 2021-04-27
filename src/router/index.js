@@ -33,7 +33,7 @@ import Layout from '@/layout'
 export const constantRoutes = [
   {
     path: '/demo',
-    component: () => import('@/components/map/map'),
+    component: () => import('@/components/player/LivePlayer'),
     hidden: true
   },
   {
@@ -45,12 +45,6 @@ export const constantRoutes = [
   {
     path: '/404',
     component: () => import('@/views/404'),
-    hidden: true
-  },
-
-  {
-    path: '/shop_detail',
-    component: () => import('@/views/shop/shopDetail'),
     hidden: true
   },
 
@@ -116,6 +110,25 @@ export const constantRoutes = [
         path: 'addMonitor',
         name: 'AddMonitor',
         meta: { title: '注册监控', roles: ['admin', 'manager'] }
+      },
+      {
+        path: 'shop_detail',
+        component: () => import('@/views/shop/shopDetail'),
+        hidden: true
+      },
+    ]
+  },
+
+  {
+    path: '/video',
+    component: Layout,
+    redirect: '/video/live_wall',
+    name: 'Video',
+    meta: { title: '视频', icon: '' },
+    children: [
+      {
+        path: 'live_wall',
+        name: 'LiveWall'
       }
     ]
   },

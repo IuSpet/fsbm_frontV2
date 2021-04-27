@@ -1,10 +1,32 @@
 <template>
-
+  <div class="shop-detail-container">
+    <el-row :gutter="50">
+      <el-col :span="12">
+        <h2>基本信息</h2>
+        <shop-info-list/>
+        <point-map class="point-map"/>
+      </el-col>
+      <el-col :span="12">
+        <device-player-form :shop-id="shopId"/>
+      </el-col>
+    </el-row>
+  </div>
 </template>
 
 <script>
+import LivePlayer from '@/components/player/LivePlayer'
+import ShopInfoList from '@/components/list/ShopInfoList'
+import PointMap from '@/components/map/PointMap'
+import DevicePlayerForm from '@/components/form/DevicePlayerForm'
+
 export default {
   name: 'shopDetail',
+  components: {
+    LivePlayer,
+    ShopInfoList,
+    PointMap,
+    DevicePlayerForm
+  },
   data() {
     return {
       shopId: this.$route.query.id * 1
@@ -19,5 +41,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.shop-detail-container {
+  padding: 20px;
 
+  .el-row {
+    .el-col {
+      .point-map {
+        width: 100%;
+        height: 400px;
+      }
+    }
+  }
+}
 </style>
