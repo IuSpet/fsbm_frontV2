@@ -9,7 +9,6 @@
       :scroll-wheel-zoom="true"
       :map-click="false"
     >
-      <bm-city-list anchor="BMAP_ANCHOR_TOP_LEFT"/>
       <bm-marker :position="pos"/>
     </baidu-map>
   </div>
@@ -18,16 +17,12 @@
 <script>
 import BaiduMap from 'vue-baidu-map/components/map/Map'
 import BmMarker from 'vue-baidu-map/components/overlays/Marker'
-import BmInfoWindow from 'vue-baidu-map/components/overlays/InfoWindow'
-import BmCityList from 'vue-baidu-map/components/controls/CityList'
 
 export default {
   name: 'PointMap',
   components: {
     BaiduMap,
-    BmMarker,
-    BmInfoWindow,
-    BmCityList
+    BmMarker
   },
   props: {
     pos: {
