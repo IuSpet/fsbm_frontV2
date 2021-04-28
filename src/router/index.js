@@ -61,6 +61,20 @@ export const constantRoutes = [
   },
 
   {
+    path: '/',
+    component: Layout,
+    redirect: '/live_wall',
+    children: [
+      {
+        path: 'live_wall',
+        name: 'LiveWall',
+        component: () => import('@/views/video/LiveWall'),
+        meta: { title: '直播墙', icon: '' }
+      }
+    ]
+  },
+
+  {
     path: '/admin',
     component: Layout,
     redirect: '/admin/stats',
@@ -115,7 +129,7 @@ export const constantRoutes = [
         path: 'shop_detail',
         component: () => import('@/views/shop/shopDetail'),
         hidden: true
-      },
+      }
     ]
   },
 
