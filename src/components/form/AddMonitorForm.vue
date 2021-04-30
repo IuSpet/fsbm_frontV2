@@ -1,8 +1,9 @@
 <template>
   <div class="monitor-form-container">
     <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-      <el-form-item label="店铺">
+      <el-form-item label="店铺" prop="shop">
         <el-autocomplete
+          popper-class="my-autocomplete"
           class="inline-input"
           v-model="form.shopName"
           :fetch-suggestions="handleSuggestions"
@@ -10,10 +11,18 @@
           @select="handleSelect"
         >
           <template slot-scope="{item}">
-            <div class="name">{{ item.shop_name }}</div>
-            <div class="addr">{{ item.addr }}</div>
+            <div class="shop-name">{{ item.shop_name }}</div>
+            <div class="shop-addr">{{ item.addr }}</div>
           </template>
         </el-autocomplete>
+      </el-form-item>
+      <el-form-item label="监控名" prop="name">
+        <el-input v-model="form.monitorName" />
+      </el-form-item>
+      <el-form-item label="视频格式">
+        <el-radio-group>
+
+        </el-radio-group>
       </el-form-item>
     </el-form>
   </div>
@@ -48,6 +57,8 @@ export default {
       ShopListByEmail(data).then(rsp => {
         const { data } = rsp
         this.shopList = data.list
+      }).catch(() => {
+        this.shopList = [{ shop_id: 1, shop_name: 'test_shop', addr: '四川省成都市双流区' }]
       })
     },
     handleSuggestions(queryString, cb) {
@@ -68,6 +79,23 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+.my-autocomplete {
+  li {
+    line-height: normal;
+    padding: 7px;
+
+    .shop-name {
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+
+    .shop-addr {
+      font-size: 12px;
+      color: #b4b4b4;
+    }
+  }
+}
+
 
 </style>
