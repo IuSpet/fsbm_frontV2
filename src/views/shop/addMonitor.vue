@@ -1,10 +1,15 @@
 <template>
-
+  <add-monitor-form/>
 </template>
 
 <script>
+import AddMonitorForm from '@/components/form/AddMonitorForm'
+
 export default {
-  name: 'addMonitor'
+  name: 'addMonitor',
+  components: {
+    AddMonitorForm
+  }
 }
 </script>
 

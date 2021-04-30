@@ -16,3 +16,35 @@ export function AddShop(data) {
     data
   })
 }
+
+export function AddMonitor(data) {
+  return request({
+    method: 'post',
+    url: Url.shop.addMonitor,
+    data
+  })
+}
+
+export function MonitorList(data) {
+  return request({
+    method: 'post',
+    url: Url.shop.monitorList,
+    data
+  })
+}
+
+export function LiveWallSrc(data) {
+  return request({
+    method: 'post',
+    url: Url.shop.liveWallSrc,
+    data
+  })
+}
+
+export function ShopListByEmail(data) {
+  return request({
+    method: 'post',
+    url: Url.shop.shopListByEmail,
+    data
+  })
+}

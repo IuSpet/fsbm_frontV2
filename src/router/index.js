@@ -123,6 +123,7 @@ export const constantRoutes = [
       {
         path: 'addMonitor',
         name: 'AddMonitor',
+        component: () => import('@/views/shop/addMonitor'),
         meta: { title: '注册监控', roles: ['admin', 'manager'] }
       },
       {

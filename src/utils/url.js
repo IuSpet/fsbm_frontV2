@@ -23,7 +23,11 @@ const Url = {
   },
   shop: {
     shopList: '/shop/shop_list',
-    addShop: '/shop/add_shop'
+    addShop: '/shop/add_shop',
+    addMonitor: '/shop/device/add_monitor',
+    monitorList: '/shop/device/monitor_list',
+    liveWallSrc: '/shop/device/live_wall_src',
+    shopListByEmail: '/shop/shop_list_by_email'
   }
 }
 
