@@ -1,8 +1,9 @@
 <template>
   <div class="monitor-form-container">
     <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-      <el-form-item label="店铺" prop="shop">
+      <el-form-item label="店铺" prop="shopName">
         <el-autocomplete
+          ref="shop"
           popper-class="my-autocomplete"
           class="inline-input"
           v-model="form.shopName"
@@ -16,33 +17,68 @@
           </template>
         </el-autocomplete>
       </el-form-item>
-      <el-form-item label="监控名" prop="name">
-        <el-input v-model="form.monitorName" />
+      <el-form-item label="监控名" prop="monitorName">
+        <el-input
+          ref="name"
+          v-model="form.monitorName"
+          maxlength="30"
+          show-word-limit
+        />
       </el-form-item>
-      <el-form-item label="视频格式">
-        <el-radio-group>
-
+      <el-form-item label="视频格式" prop="videoType">
+        <el-radio-group v-model="form.videoType">
+          <el-radio label="flv">flv</el-radio>
+          <el-radio label="hls">hls</el-radio>
+          <el-radio label="">无</el-radio>
         </el-radio-group>
       </el-form-item>
+      <el-form-item label="视频源" prop="videoSrc">
+        <el-input
+          :disabled="!hasType"
+          v-model="form.videoSrc"
+          maxlength="200"
+          show-word-limit
+        />
+      </el-form-item>
+      <el-button :loading="loading" type="primary" @click.native.prevent="handleClick">注册</el-button>
     </el-form>
   </div>
 </template>
 
 <script>
-import { ShopListByEmail } from '@/api/shop'
+import { AddMonitor, ShopListByEmail } from '@/api/shop'
 
 export default {
   name: 'AddMonitorForm',
   data() {
+    const validateShop = (rule, value, callback) => {
+      if (!value || value.length === 0) {
+        console.log(value)
+        console.log(this.form.shopName)
+        callback('店铺不能为空')
+      } else {
+        callback()
+      }
+    }
     return {
       form: {
         shopId: 0,
         shopName: '',
         monitorName: '',
         videoSrc: '',
-        videoType: ''
+        videoType: 'hls'
       },
-      shopList: []
+      shopList: [],
+      rules: {
+        shopName: [{ required: true, trigger: 'change', message: '店铺不能为空' }],
+        monitorName: [{ required: true, trigger: 'blur', message: '监控名不能为空' }]
+      },
+      loading: false
+    }
+  },
+  computed: {
+    hasType() {
+      return this.form.videoType.length > 0
     }
   },
   created() {
@@ -74,12 +110,36 @@ export default {
     handleSelect(shop) {
       this.form.shopId = shop['shop_id']
       this.form.shopName = shop['shop_name']
+    },
+    handleClick() {
+      this.$refs.form.validate(valid => {
+        if (valid) {
+          this.loading = true
+          const data = {
+            shop_id: this.form.shopId,
+            name: this.form.monitorName,
+            video_type: this.form.videoType,
+            video_src: this.form.videoSrc
+          }
+          AddMonitor(data).then(() => {
+            this.loading = false
+          }).catch(() => {
+            this.loading = false
+          })
+        } else {
+          console.log('check failed')
+        }
+      })
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
+.monitor-form-container{
+  padding: 20px;
+  width: 50%;
+}
 .my-autocomplete {
   li {
     line-height: normal;
