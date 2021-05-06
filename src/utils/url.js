@@ -10,7 +10,8 @@ const Url = {
     getProfile: '/user/get_profile',
     setAvatar: '/user/set_avatar',
     getAvatar: '/user/get_avatar',
-    getRoles: '/user/get_roles'
+    getRoles: '/user/get_roles',
+    getExpiredRoles: '/user/get_expired_roles'
   },
   tool: {
     sendEmailCode: '/tool/no_auth/generate_verification_code'
@@ -28,6 +29,9 @@ const Url = {
     monitorList: '/shop/device/monitor_list',
     liveWallSrc: '/shop/device/live_wall_src',
     shopListByEmail: '/shop/shop_list_by_email'
+  },
+  auth: {
+    roleList: 'auth/role_list'
   }
 }
 
