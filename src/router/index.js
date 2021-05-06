@@ -118,6 +118,7 @@ export const constantRoutes = [
       {
         path: 'monitorList',
         name: 'MonitorList',
+        component: () => import('@/views/shop/monitorList'),
         meta: { title: '监控列表' }
       },
       {
