@@ -13,6 +13,7 @@
 import RoleBoard from '@/components/card/RoleBoard'
 import ApplyRoleForm from '@/components/form/ApplyRoleForm'
 import { applyRole } from '@/api/user'
+import { UserRoleList } from '@/api/auth'
 
 export default {
   name: 'applyRole',
@@ -22,9 +23,12 @@ export default {
   },
   data() {
     return {
-      activeRoles: ['admin', 'manager'],
+      activeRoles: [],
       expiredRoles: []
     }
+  },
+  created() {
+    this.queryRoles()
   },
   methods: {
     handleApply(form) {
@@ -44,7 +48,14 @@ export default {
      * 查询过期角色和激活角色
      */
     queryRoles() {
-
+      const data = {
+        email: this.$store.getters.email
+      }
+      UserRoleList(data).then(rsp => {
+        const { data } = rsp
+        this.activeRoles = data['active_roles'].map(a => a.role)
+        this.expiredRoles = data['expired_roles'].map(a => a.role)
+      })
     }
   }
 }

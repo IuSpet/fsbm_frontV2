@@ -8,3 +8,11 @@ export function RoleList(data) {
     data
   })
 }
+
+export function UserRoleList(data) {
+  return request({
+    method: 'post',
+    url: Url.auth.userRoleList,
+    data
+  })
+}
