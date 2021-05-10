@@ -16,3 +16,11 @@ export function UserRoleList(data) {
     data
   })
 }
+
+export function ApplyRole(data){
+  return request({
+    method:'post',
+    url:Url.auth.applyRole,
+    data
+  })
+}

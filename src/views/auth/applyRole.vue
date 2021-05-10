@@ -12,7 +12,7 @@
 <script>
 import RoleBoard from '@/components/card/RoleBoard'
 import ApplyRoleForm from '@/components/form/ApplyRoleForm'
-import { applyRole } from '@/api/user'
+import { ApplyRole } from '@/api/auth'
 import { UserRoleList } from '@/api/auth'
 
 export default {
@@ -28,7 +28,9 @@ export default {
     }
   },
   created() {
-    this.queryRoles()
+    //this.queryRoles()
+    this.activeRoles = [{ role: 'admin' }]
+    this.expiredRoles = [{ role: 'manager' }]
   },
   methods: {
     handleApply(form) {
@@ -37,7 +39,7 @@ export default {
         reason: form.reason,
         email: this.$store.getters.email
       }
-      applyRole(data).then(() => {
+      ApplyRole(data).then(() => {
         this.$message({
           message: '申请成功，等待管理员审核',
           type: 'success'

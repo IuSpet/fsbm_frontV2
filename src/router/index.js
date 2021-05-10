@@ -69,7 +69,7 @@ export const constantRoutes = [
         path: 'live_wall',
         name: 'LiveWall',
         component: () => import('@/views/video/LiveWall'),
-        meta: { title: '直播墙', icon: '' }
+        meta: { title: '监控墙', icon: '' }
       }
     ]
   },
@@ -137,6 +137,30 @@ export const constantRoutes = [
       {
         path: 'shop_detail',
         component: () => import('@/views/shop/shopDetail'),
+        hidden: true
+      }
+    ]
+  },
+
+  {
+    path: '/alarm',
+    component: Layout,
+    redirect: '/alarm/alarm_list',
+    name: 'Alarm',
+    meta: { title: '报警', icon: '' },
+    alwaysShow: true,
+    children: [
+      {
+        path: '/alarm/alarm_list',
+        name: 'AlarmList',
+        component: () => import('@/views/alarm/AlarmList'),
+        meta: { title: '报警列表', icon: '' }
+      },
+      {
+        path: '/alarm/alarm_detail',
+        name: 'AlarmDetail',
+        component: () => import('@/views/alarm/AlarmDetail'),
+        meta: { title: '报警详情', icon: '' },
         hidden: true
       }
     ]

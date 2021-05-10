@@ -46,7 +46,7 @@ export default {
   },
   methods: {
     queryDeviceList() {
-
+      //todo 查询监控设备源列表
     },
     /**
      * 根据基数除以4取余筛选

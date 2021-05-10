@@ -15,6 +15,7 @@
           <h4>{{ shop.name }}</h4>
           <p>负责人{{ shop.manager }}</p>
           <p>联系电话:{{ shop.phone }}</p>
+          <p>今日报警数量:{{ shop.notice_cnt }}</p>
           <el-button @click="handleDetail(shop.id)">详细信息</el-button>
         </bm-info-window>
       </bm-marker>
@@ -29,7 +30,7 @@ import BmInfoWindow from 'vue-baidu-map/components/overlays/InfoWindow'
 import BmCityList from 'vue-baidu-map/components/controls/CityList'
 
 export default {
-  name:'ShopMap',
+  name: 'ShopMap',
   components: {
     BaiduMap,
     BmMarker,
@@ -61,6 +62,7 @@ export default {
         name: 'abcd',
         manager: 'efgh',
         phone: '123456',
+        notice_cnt: '3',
         pos: {
           lng: 116.424,
           lat: 39.915
@@ -80,7 +82,7 @@ export default {
       this.shopList[index].show = false
     },
     handleDetail(id) {
-      this.$router.push({ path: '/shop_detail', query: { id } })
+      this.$router.push({ path: '/shop/shop_detail', query: { id } })
     }
   }
 }
