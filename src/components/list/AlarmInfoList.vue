@@ -33,15 +33,7 @@ export default {
     info: {
       type: Object,
       default: () => {
-        return {
-          shop_name: '水天堂工农路店',
-          addr: '',
-          admin_name: 'test_user1',
-          admin_phone: '123456',
-          admin_email: 'test_login1@test.com',
-          alarm_content: '后厨有人员未佩戴帽子',
-          alarm_at: '2019-11-20 09:55:15'
-        }
+        return {}
       }
     }
   }

@@ -1,5 +1,5 @@
 import request from '@/utils/request'
-import * as Url from 'url'
+import Url from '@/utils/url'
 
 export function RoleList(data) {
   return request({
@@ -17,10 +17,10 @@ export function UserRoleList(data) {
   })
 }
 
-export function ApplyRole(data){
+export function ApplyRole(data) {
   return request({
-    method:'post',
-    url:Url.auth.applyRole,
+    method: 'post',
+    url: Url.auth.applyRole,
     data
   })
 }

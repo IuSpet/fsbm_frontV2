@@ -71,7 +71,6 @@ export default {
     statusFilter(status) {
       const statusMap = {
         0: 'success',
-        draft: 'gray',
         1: 'danger'
       }
       return statusMap[MappingStatus(status)]

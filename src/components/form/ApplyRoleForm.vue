@@ -95,7 +95,7 @@ export default {
       this.form.role = shop['role']
     },
     queryRoleList() {
-      RoleList(null).then(rsp => {
+      RoleList().then(rsp => {
         const { data } = rsp
         this.roleList = data.list
       })

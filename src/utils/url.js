@@ -31,9 +31,9 @@ const Url = {
     shopListByEmail: '/shop/shop_list_by_email'
   },
   auth: {
-    roleList: 'auth/role_list',
-    userRoleList: 'auth/user_role_list',
-    applyRole: 'auth/apply_role'
+    roleList: '/auth/role_list',
+    userRoleList: '/auth/user_role_list',
+    applyRole: '/auth/apply_role'
   }
 }
 
