@@ -32,3 +32,11 @@ export function ApplyOrderList(data) {
     data
   })
 }
+
+export function ReviewOrder(data) {
+  return request({
+    method: 'post',
+    url: Url.auth.reviewOrder,
+    data
+  })
+}

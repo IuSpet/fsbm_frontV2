@@ -34,7 +34,8 @@ const Url = {
     roleList: '/auth/role_list',
     userRoleList: '/auth/user_role_list',
     applyRole: '/auth/apply_role',
-    applyOrderList: '/auth/apply_order_list'
+    applyOrderList: '/auth/apply_order_list',
+    reviewOrder: '/auth/review_order'
   }
 }
 

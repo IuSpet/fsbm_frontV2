@@ -12,6 +12,17 @@
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
     />
+    <el-drawer
+      title="审核角色申请"
+      :visible.sync="reviewOrder"
+      direction="rtl"
+      ref="drawer"
+    >
+      <div class="review-drawer">
+        <apply-role-list :info="adjustRow"/>
+        <review-role-form @submit-review="handleSubmitReview"/>
+      </div>
+    </el-drawer>
   </div>
 </template>
 
@@ -19,15 +30,19 @@
 import ApplyRoleListForm from '@/components/form/ApplyRoleListForm'
 import ApplyRoleTable from '@/components/table/ApplyRoleTable'
 import TableBottom from '@/components/tool/TableBottom'
+import ReviewRoleForm from '@/components/form/ReviewRoleForm'
+import ApplyRoleList from '@/components/list/ApplyRoleList'
 import { DateFormat } from '@/utils'
-import { ApplyOrderList } from '@/api/auth'
+import { ApplyOrderList, ReviewOrder } from '@/api/auth'
 
 export default {
   name: 'applyList',
   components: {
     ApplyRoleListForm,
     TableBottom,
-    ApplyRoleTable
+    ApplyRoleTable,
+    ReviewRoleForm,
+    ApplyRoleList
   },
   created() {
     if (Date.prototype.format === undefined) {
@@ -50,7 +65,9 @@ export default {
       sortFields: null,
       tableData: [],
       loading: false,
-      totalCnt: 0
+      totalCnt: 0,
+      reviewOrder: false,
+      adjustRow: null
     }
   },
   methods: {
@@ -78,6 +95,13 @@ export default {
         const { data } = rsp
         this.tableData = data['list']
         this.totalCnt = data['total_cnt']
+      }).catch(err => {
+        this.tableData = [{
+          id: 0,
+          user: 'test_user',
+          role: 'test_role',
+          reason: 'test apply role reason'
+        }]
       })
     },
     /**
@@ -111,8 +135,15 @@ export default {
       this.execQuery(data)
       this.loading = false
     },
-    handleReview() {
-
+    handleReview(row) {
+      this.reviewOrder = true
+      this.adjustRow = row
+    },
+    handleSubmitReview(form) {
+      this.loading = true
+      ReviewOrder(data).then(rsp => {
+        this.queryData()
+      })
     }
   }
 }

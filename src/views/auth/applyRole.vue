@@ -37,7 +37,8 @@ export default {
       const data = {
         role_id: form.roleId,
         reason: form.reason,
-        email: this.$store.getters.email
+        email: this.$store.getters.email,
+        expiration: form.expire
       }
       ApplyRole(data).then(() => {
         this.$message({
