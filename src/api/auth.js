@@ -24,3 +24,11 @@ export function ApplyRole(data) {
     data
   })
 }
+
+export function ApplyOrderList(data) {
+  return request({
+    method: 'post',
+    url: Url.auth.applyOrderList,
+    data
+  })
+}

@@ -11,32 +11,42 @@
       @sort-change="handleSortChange"
       :header-cell-style="handleHeaderStyle"
     >
-      <el-table-column label="申请人" prop="user" width="150" align="center" sortable="custom">
+      <el-table-column label="申请人" prop="User" width="150" align="center" sortable="custom">
         <template slot-scope="scope">
           {{ scope.row.user }}
         </template>
       </el-table-column>
-      <el-table-column label="申请角色" prop="role" width="150" align="center" sortable="custom">
+      <el-table-column label="申请角色" prop="Role" width="150" align="center" sortable="custom">
         <template slot-scope="scope">
           {{ scope.row.role }}
         </template>
       </el-table-column>
-      <el-table-column label="申请理由" prop="applyReason" width="225" align="center" sortable="custom">
+      <el-table-column label="申请理由" prop="Reason" width="225" align="center" sortable="custom">
         <template slot-scope="scope">
-          {{ scope.row.apply_reason }}
+          {{ scope.row.reason }}
         </template>
       </el-table-column>
-      <el-table-column label="审批人" prop="reviewer" width="150" align="center" sortable="custom">
+      <el-table-column label="申请时间" prop="CreatedAt" width="175" align="center" sortable="custom">
+        <template slot-scope="scope">
+          {{ scope.row.created_at }}
+        </template>
+      </el-table-column>
+      <el-table-column label="审批人" prop="Reviewer" width="150" align="center" sortable="custom">
         <template slot-scope="scope">
           {{ scope.row.reviewer }}
         </template>
       </el-table-column>
-      <el-table-column label="审批理由" prop="reviewReason" width="225" align="center" sortable="custom">
+      <el-table-column label="审批理由" prop="ReviewReason" width="225" align="center" sortable="custom">
         <template slot-scope="scope">
           {{ scope.row.review_reason }}
         </template>
       </el-table-column>
-      <el-table-column label="工单状态" prop="status" width="150" align="center" sortable="custom">
+      <el-table-column label="审批时间" prop="ReviewAt" width="175" align="center" sortable="custom">
+        <template slot-scope="scope">
+          {{ scope.row.review_at }}
+        </template>
+      </el-table-column>
+      <el-table-column label="工单状态" prop="Status" width="150" align="center" sortable="custom">
         <template slot-scope="scope">
           <el-tag :type="scope.row.status | statusFilter">{{ scope.row.status }}</el-tag>
         </template>

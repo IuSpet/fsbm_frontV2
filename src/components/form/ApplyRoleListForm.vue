@@ -2,7 +2,7 @@
   <div class="apply-role-list-form-container">
     <el-form ref="form" :inline="true" :model="form" class="user-table-form">
       <el-form-item label="申请用户名">
-        <el-input clearable v-model="form.name"/>
+        <el-input clearable v-model="form.user"/>
       </el-form-item>
       <el-form-item label="申请角色">
         <el-select v-model="form.role" multiple placeholder="请选择">
@@ -24,8 +24,22 @@
           />
         </el-select>
       </el-form-item>
-      <el-form-item label="提交时间">
-        <el-date-picker v-model="form.submitRange"
+      <el-form-item label="审批人">
+        <el-input clearable v-model="form.reviewer"/>
+      </el-form-item>
+      <el-form-item label="申请时间">
+        <el-date-picker v-model="form.applyRange"
+                        type="datetimerange"
+                        :picker-options="pickerOptions"
+                        range-separator="至"
+                        start-placeholder="开始日期"
+                        end-placeholder="结束日期"
+                        align="right"
+                        clearable
+        />
+      </el-form-item>
+      <el-form-item label="审批时间">
+        <el-date-picker v-model="form.reviewRange"
                         type="datetimerange"
                         :picker-options="pickerOptions"
                         range-separator="至"
@@ -50,10 +64,12 @@ export default {
   data() {
     return {
       form: {
-        name: '',
+        user: '',
         role: [],
         status: [],
-        submitRange: null
+        applyRange: null,
+        reviewRange: null,
+        reviewer: ''
       },
       roleList: [],
       statusList: [],
