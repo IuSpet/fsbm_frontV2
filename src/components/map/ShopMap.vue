@@ -15,7 +15,7 @@
           <h4>{{ shop.name }}</h4>
           <p>负责人{{ shop.manager }}</p>
           <p>联系电话:{{ shop.phone }}</p>
-          <p>今日报警数量:{{ shop.notice_cnt }}</p>
+          <p>今日报警数量:{{ shop.alarm_cnt }}</p>
           <el-button @click="handleDetail(shop.id)">详细信息</el-button>
         </bm-info-window>
       </bm-marker>
@@ -28,6 +28,7 @@ import BaiduMap from 'vue-baidu-map/components/map/Map'
 import BmMarker from 'vue-baidu-map/components/overlays/Marker'
 import BmInfoWindow from 'vue-baidu-map/components/overlays/InfoWindow'
 import BmCityList from 'vue-baidu-map/components/controls/CityList'
+import { DashboardShopList } from '@/api/dashboard'
 
 export default {
   name: 'ShopMap',
@@ -62,7 +63,7 @@ export default {
         name: 'abcd',
         manager: 'efgh',
         phone: '123456',
-        notice_cnt: '3',
+        alarm_cnt: '3',
         pos: {
           lng: 116.424,
           lat: 39.915
@@ -71,9 +72,29 @@ export default {
       }]
     }
   },
+  created() {
+    this.initShopPoints()
+  },
   methods: {
     initShopPoints() {
-
+      DashboardShopList(null).then(rsp => {
+        const { data } = rsp
+        this.shopList = []
+        for (let row of data.list) {
+          this.shopList.push({
+            id: row.shop_id,
+            name: row.shop_name,
+            manager: row.user_name,
+            phone: row.user_phone,
+            alarm_cnt: row.alarm_cnt,
+            pos: {
+              lng: row.longitude,
+              lat: row.latitude
+            },
+            show: false
+          })
+        }
+      })
     },
     handleClick(index) {
       this.shopList[index].show = true
