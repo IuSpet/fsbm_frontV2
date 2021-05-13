@@ -36,6 +36,10 @@ const Url = {
     applyRole: '/auth/apply_role',
     applyOrderList: '/auth/apply_order_list',
     reviewOrder: '/auth/review_order'
+  },
+  dashboard:{
+    globalStats:'/dashboard/global_stats',
+    shopList:'/dashboard/shop_list'
   }
 }
 

@@ -9,7 +9,7 @@
           <div class="card-content">
             <h4 class="card-header">今日接收记录</h4>
             <p class="card-text">
-              <count-to :start-val="0" :end-val="102400" :duration="2600"/>
+              <count-to :start-val="0" :end-val=this.cardData.recordCnt :duration="2600"/>
             </p>
           </div>
         </el-card>
@@ -22,7 +22,7 @@
           <div class="card-content">
             <h4 class="card-header">今日报警数量</h4>
             <p class="card-text">
-              <count-to :start-val="0" :end-val="2400" :duration="2600"/>
+              <count-to :start-val="0" :end-val=this.cardData.alarmCnt :duration="2600"/>
             </p>
           </div>
         </el-card>
@@ -34,7 +34,7 @@
         </span>
           <div class="card-content">
             <h4 class="card-header">最新接收记录</h4>
-            <p class="card-text">12：00</p>
+            <p class="card-text">{{ cardData.latestRecord }}</p>
           </div>
         </el-card>
       </el-col>
@@ -45,7 +45,7 @@
         </span>
           <div class="card-content">
             <h4 class="card-header">店铺合格比</h4>
-            <p class="card-text">50%</p>
+            <p class="card-text">{{ cardData.passRate }}</p>
           </div>
         </el-card>
       </el-col>
@@ -61,8 +61,18 @@ export default {
   components: {
     CountTo
   },
-  data() {
-    return {}
+  props: {
+    cardData: {
+      type: Object,
+      default: () => {
+        return {
+          recordCnt: 0,
+          alarmCnt: 0,
+          latestRecord: '00:00',
+          passRate: '100%'
+        }
+      }
+    }
   }
 }
 </script>

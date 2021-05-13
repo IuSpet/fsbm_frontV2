@@ -1,7 +1,7 @@
 <template>
   <div class="dashboard-container">
     <div class="info-container">
-      <panel-group @handleSetLineChartData="" />
+      <panel-group :card-data="cardData"/>
     </div>
     <div class="map-container">
       <shop-map/>
@@ -12,6 +12,7 @@
 <script>
 import ShopMap from '@/components/map/ShopMap'
 import PanelGroup from '@/components/card/PanelGroup'
+import { GlobalStats } from '@/api/dashboard'
 
 export default {
   name: 'Dashboard',
@@ -20,7 +21,35 @@ export default {
     PanelGroup
   },
   data() {
-    return {}
+    return {
+      cardData: {
+        recordCnt: 0,
+        alarmCnt: 0,
+        latestRecord: '00:00',
+        passRate: '100%'
+      },
+      intervalTaskId: null
+    }
+  },
+  created() {
+    this.queryGlobalStats()
+    this.intervalTaskId = setInterval(this.queryGlobalStats, 30000)
+  },
+  methods: {
+    queryGlobalStats() {
+      GlobalStats(null).then(rsp => {
+        const { data } = rsp
+        this.cardData.recordCnt = data['record_cnt']
+        this.cardData.alarmCnt = data['alarm_cnt']
+        this.cardData.latestRecord = data['latest_record']
+        this.cardData.passRate = data['pass_rate'] * 100 + '%'
+      })
+    }
+  },
+  beforeDestroy() {
+    if (this.intervalTaskId) {
+      clearInterval(this.intervalTaskId)
+    }
   }
 }
 </script>
