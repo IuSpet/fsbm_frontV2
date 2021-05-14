@@ -1,7 +1,7 @@
 <template>
   <div>
-    <shop-list-form @query="handleQuery" />
-    <shop-table :data-loading="loading" :table-data="tableData" @sort-change="handleSortChange" />
+    <shop-list-form @query="handleQuery"/>
+    <shop-table :data-loading="loading" :table-data="tableData" @sort-change="handleSortChange"/>
     <TableBottom
       :total-cnt="totalCnt"
       @size-change="handleSizeChange"
@@ -16,8 +16,8 @@
 import ShopListForm from '@/components/form/ShopListForm'
 import ShopTable from '@/components/table/ShopTable'
 import TableBottom from '@/components/tool/TableBottom'
-import { ShopList } from '@/api/shop'
-import { DateFormat } from '@/utils'
+import { ShopList, ShopListCsv } from '@/api/shop'
+import { DateFormat, DownloadCsvFile } from '@/utils'
 
 export default {
   name: 'ShopList',
@@ -69,7 +69,24 @@ export default {
 
     },
     handleExport() {
-
+      let left, right
+      if (this.form.registerRange) {
+        left = this.form.registerRange[0].format('yyyy-MM-dd hh:mm:ss')
+        right = this.form.registerRange[1].format('yyyy-MM-dd hh:mm:ss')
+      }
+      const data = {
+        name: this.form.name,
+        admin: this.form.admin,
+        addr: this.form.addr,
+        create_begin: left,
+        create_end: right,
+        page: this.page,
+        page_size: this.pageSize,
+        sort_fields: this.sortFields
+      }
+      ShopListCsv(data).then(data => {
+        DownloadCsvFile(data, '店铺列表.csv')
+      })
     },
     execQuery(data) {
       ShopList(data).then(rsp => {

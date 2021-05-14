@@ -4,7 +4,7 @@
       class="bm-view"
       :center="center"
       :ak="ak"
-      :zoom="15"
+      :zoom="5"
       :map-style="mapStyle"
       :scroll-wheel-zoom="true"
       :map-click="false"

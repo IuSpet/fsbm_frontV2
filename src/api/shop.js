@@ -48,3 +48,19 @@ export function ShopListByEmail(data) {
     data
   })
 }
+
+export function ShopListCsv(data) {
+  return request({
+    method: 'post',
+    url: Url.shop.shopListCsv,
+    data
+  })
+}
+
+export function MonitorListCsv(data) {
+  return request({
+    method: 'post',
+    url: Url.shop.monitorListCsv,
+    data
+  })
+}

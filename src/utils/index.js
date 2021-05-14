@@ -208,8 +208,25 @@ export function MappingStatus(x) {
  * 将单词首字母大写
  * @param {string} word
  * @return {string}
- * @constructor
  */
 export function UpperFirstLetter(word) {
   return word.slice(0, 1).toUpperCase() + word.slice(1)
+}
+
+/**
+ * 下载csv文件
+ * @param data 数据流
+ * @param fileName 文件名
+ */
+export function DownloadCsvFile(data, fileName) {
+  if (!data) {
+    return
+  }
+  let url = window.URL.createObjectURL(new Blob([data]))
+  let link = document.createElement('a')
+  link.style.display = 'none'
+  link.href = url
+  link.setAttribute('download', fileName)
+  document.body.appendChild(link)
+  link.click()
 }

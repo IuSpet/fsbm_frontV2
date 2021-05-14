@@ -7,7 +7,7 @@ import { getToken, getEmail } from '@/utils/auth'
 const service = axios.create({
   // baseURL: process.env.VUE_APP_BASE_API, // url = base url + request url
   // baseURL: 'http://47.95.248.242:8080', // url = base url + request url
-  baseURL:'http://localhost:8080',
+  baseURL: 'http://localhost:8080',
   // withCredentials: true, // send cookies when cross-domain requests
   timeout: 5000 // request timeout
 })
@@ -17,12 +17,8 @@ service.interceptors.request.use(
   config => {
     // do something before request is sent
 
-    if (store.getters.token) {
-      config.headers['Access-Token'] = getToken()
-    }
-    if (store.getters.email) {
-      config.headers['Access-Email'] = getEmail()
-    }
+    config.headers['Access-Token'] = getToken()
+    config.headers['Access-Email'] = getEmail()
     return config
   },
   error => {
@@ -47,7 +43,9 @@ service.interceptors.response.use(
   response => {
     console.log(response)
     const res = response.data
-
+    if (res.type === 'application/octet-stream'){
+      return res
+    }
     // if the custom code is not 20000, it is judged as an error.
     // todo:联调接口调整这一块
     // console.log(res)

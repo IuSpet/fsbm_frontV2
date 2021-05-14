@@ -9,7 +9,7 @@
         </el-col>
         <el-col :span="4">
           <div>
-            <el-button type="info" size="small" round style="margin-right: 10px" @click="exportData()">导出</el-button>
+            <el-button type="info" size="small" round style="margin-right: 10px" @click="handleExport">导出</el-button>
             <el-button type="info" size="small" round>打印</el-button>
           </div>
         </el-col>
@@ -36,8 +36,8 @@
 <script>
 import UserTableForm from '@/components/form/UserTableForm'
 import UserTable from '@/components/table/UserTable'
-import { getUserList } from '@/api/admin'
-import { DateFormat } from '@/utils'
+import { getUserList, getUserListCsv } from '@/api/admin'
+import { DateFormat, DownloadCsvFile } from '@/utils'
 
 export default {
   name: 'index',
@@ -126,8 +126,27 @@ export default {
       console.log(data)
       this.queryData(data)
     },
-    exportTable() {
-
+    handleExport() {
+      let left, right
+      if (this.form.registerRange) {
+        left = this.form.registerRange[0].format('yyyy-MM-dd hh:mm:ss')
+        right = this.form.registerRange[1].format('yyyy-MM-dd hh:mm:ss')
+      }
+      const data = {
+        name: this.form.name,
+        gender: parseInt(this.form.gender),
+        age: parseInt(this.form.age),
+        email: this.form.email,
+        phone: this.form.phone,
+        create_begin: left,
+        create_end: right,
+        page: this.currentPage,
+        page_size: this.pageSize,
+        sort_fields: this.sortFields
+      }
+      getUserListCsv(data).then(data => {
+        DownloadCsvFile(data, '用户列表.csv')
+      })
     },
     printTable() {
 

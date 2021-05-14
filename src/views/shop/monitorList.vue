@@ -16,7 +16,8 @@
 import MonitorListForm from '@/components/form/MonitorListForm'
 import MonitorTable from '@/components/table/MonitorTable'
 import TableBottom from '@/components/tool/TableBottom'
-import { MonitorList } from '@/api/shop'
+import { MonitorList, MonitorListCsv } from '@/api/shop'
+import { DownloadCsvFile } from '@/utils'
 
 export default {
   name: 'monitorList',
@@ -88,7 +89,19 @@ export default {
 
     },
     handleExport() {
-
+      const data = {
+        device_name: this.form.monitorName,
+        shop_name: this.form.shopName,
+        admin_name: this.form.adminName,
+        addr: this.form.addr,
+        video_type: this.form.videoType,
+        page: this.page,
+        page_size: this.pageSize,
+        sort_fields: this.sortFields
+      }
+      MonitorListCsv(data).then(data => {
+        DownloadCsvFile(data, '监控设备列表')
+      })
     }
   }
 }

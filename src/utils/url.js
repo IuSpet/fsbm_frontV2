@@ -28,7 +28,9 @@ const Url = {
     addMonitor: '/shop/device/add_monitor',
     monitorList: '/shop/device/monitor_list',
     liveWallSrc: '/shop/device/live_wall_src',
-    shopListByEmail: '/shop/shop_list_by_email'
+    shopListByEmail: '/shop/shop_list_by_email',
+    shopListCsv: '/shop/shop_list/csv',
+    monitorListCsv: '/shop/device/monitor_list/csv'
   },
   auth: {
     roleList: '/auth/role_list',
@@ -37,9 +39,9 @@ const Url = {
     applyOrderList: '/auth/apply_order_list',
     reviewOrder: '/auth/review_order'
   },
-  dashboard:{
-    globalStats:'/dashboard/global_stats',
-    shopList:'/dashboard/shop_list'
+  dashboard: {
+    globalStats: '/dashboard/global_stats',
+    shopList: '/dashboard/shop_list'
   }
 }
 
