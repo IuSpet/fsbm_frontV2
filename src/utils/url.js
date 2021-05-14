@@ -37,6 +37,7 @@ const Url = {
     userRoleList: '/auth/user_role_list',
     applyRole: '/auth/apply_role',
     applyOrderList: '/auth/apply_order_list',
+    applyOrderListCsv: '/auth/apply_order_list/csv',
     reviewOrder: '/auth/review_order'
   },
   dashboard: {

@@ -11,6 +11,8 @@
       :total-cnt="totalCnt"
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
+      @export="handleExport"
+      @print="handlePrint"
     />
     <el-drawer
       title="审核角色申请"
@@ -32,8 +34,8 @@ import ApplyRoleTable from '@/components/table/ApplyRoleTable'
 import TableBottom from '@/components/tool/TableBottom'
 import ReviewRoleForm from '@/components/form/ReviewRoleForm'
 import ApplyRoleList from '@/components/list/ApplyRoleList'
-import { DateFormat } from '@/utils'
-import { ApplyOrderList, ReviewOrder } from '@/api/auth'
+import { DateFormat, DownloadCsvFile } from '@/utils'
+import { ApplyOrderList, ApplyOrderListCsv, ReviewOrder } from '@/api/auth'
 
 export default {
   name: 'applyList',
@@ -141,9 +143,39 @@ export default {
     },
     handleSubmitReview(form) {
       this.loading = true
-      ReviewOrder(data).then(rsp => {
+      ReviewOrder(form).then(rsp => {
         this.queryData()
       })
+    },
+    handleExport() {
+      let applyLeft, applyRight, reviewLeft, reviewRight
+      if (this.form.applyRange) {
+        applyLeft = this.form.applyRange[0].format('yyyy-MM-dd hh:mm:ss')
+        applyRight = this.form.applyRange[1].format('yyyy-MM-dd hh:mm:ss')
+      }
+      if (this.form.reviewRange) {
+        reviewLeft = this.form.reviewRange[0].format('yyyy-MM-dd hh:mm:ss')
+        reviewRight = this.form.reviewRange[1].format('yyyy-MM-dd hh:mm:ss')
+      }
+      const data = {
+        user: this.form.user,
+        role: this.form.role,
+        reviewer: this.form.reviewer,
+        status: this.form.status,
+        apply_begin_time: applyLeft,
+        apply_end_time: applyRight,
+        review_begin_time: reviewLeft,
+        review_end_time: reviewRight,
+        page: this.page,
+        pageSize: this.pageSize,
+        sort_fields: this.sortFields
+      }
+      ApplyOrderListCsv(data).then(data => {
+        DownloadCsvFile(data, '申请工单列表.csv')
+      })
+    },
+    handlePrint() {
+
     }
   }
 }

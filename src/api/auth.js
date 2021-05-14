@@ -40,3 +40,11 @@ export function ReviewOrder(data) {
     data
   })
 }
+
+export function ApplyOrderListCsv(data) {
+  return request({
+    method: 'post',
+    url: Url.auth.applyOrderListCsv,
+    data
+  })
+}
