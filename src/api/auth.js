@@ -48,3 +48,11 @@ export function ApplyOrderListCsv(data) {
     data
   })
 }
+
+export function ApplyOrderListPdf(data) {
+  return request({
+    method: 'post',
+    url: Url.auth.applyOrderListPrint,
+    data
+  })
+}

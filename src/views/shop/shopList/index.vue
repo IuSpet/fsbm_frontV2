@@ -66,7 +66,22 @@ export default {
       this.queryData()
     },
     handlePrint() {
-
+      let left, right
+      if (this.form.registerRange) {
+        left = this.form.registerRange[0].format('yyyy-MM-dd hh:mm:ss')
+        right = this.form.registerRange[1].format('yyyy-MM-dd hh:mm:ss')
+      }
+      const data = {
+        name: this.form.name,
+        admin: this.form.admin,
+        addr: this.form.addr,
+        create_begin: left,
+        create_end: right,
+        page: this.page,
+        page_size: this.pageSize,
+        sort_fields: this.sortFields
+      }
+      this.$router.push({ name: 'ShopTablePdf', params: { form: JSON.stringify(data) } })
     },
     handleExport() {
       let left, right

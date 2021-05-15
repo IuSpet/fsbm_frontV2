@@ -16,3 +16,11 @@ export function AlarmListCsv(data) {
     data
   })
 }
+
+export function AlarmListPdf(data) {
+  return request({
+    method: 'post',
+    url: Url.alarm.alarmListPrint,
+    data
+  })
+}

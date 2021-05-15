@@ -175,7 +175,29 @@ export default {
       })
     },
     handlePrint() {
-
+      let applyLeft, applyRight, reviewLeft, reviewRight
+      if (this.form.applyRange) {
+        applyLeft = this.form.applyRange[0].format('yyyy-MM-dd hh:mm:ss')
+        applyRight = this.form.applyRange[1].format('yyyy-MM-dd hh:mm:ss')
+      }
+      if (this.form.reviewRange) {
+        reviewLeft = this.form.reviewRange[0].format('yyyy-MM-dd hh:mm:ss')
+        reviewRight = this.form.reviewRange[1].format('yyyy-MM-dd hh:mm:ss')
+      }
+      const data = {
+        user: this.form.user,
+        role: this.form.role,
+        reviewer: this.form.reviewer,
+        status: this.form.status,
+        apply_begin_time: applyLeft,
+        apply_end_time: applyRight,
+        review_begin_time: reviewLeft,
+        review_end_time: reviewRight,
+        page: this.page,
+        pageSize: this.pageSize,
+        sort_fields: this.sortFields
+      }
+      this.$router.push({ name: 'ApplyTablePdf', params: { form: JSON.stringify(data) } })
     }
   }
 }

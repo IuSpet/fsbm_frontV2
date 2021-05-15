@@ -86,7 +86,17 @@ export default {
       this.queryData()
     },
     handlePrint() {
-
+      const data = {
+        device_name: this.form.monitorName,
+        shop_name: this.form.shopName,
+        admin_name: this.form.adminName,
+        addr: this.form.addr,
+        video_type: this.form.videoType,
+        page: this.page,
+        page_size: this.pageSize,
+        sort_fields: this.sortFields
+      }
+      this.$router.push({ name: 'MonitorTablePdf', params: { form: JSON.stringify(data) } })
     },
     handleExport() {
       const data = {

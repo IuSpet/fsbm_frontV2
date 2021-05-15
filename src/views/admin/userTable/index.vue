@@ -2,48 +2,29 @@
   <div>
     <user-table-form @query-list="handleQueryForm"/>
     <user-table :data-loading="loading" :table-data="tableData" @sort-change="handleSortChange"/>
-    <div style="margin-top:5px;">
-      <el-row :gutter="10">
-        <el-col :span="6">
-          <div>共{{ totalCnt }}条数据，当前展示{{ showRange }}条</div>
-        </el-col>
-        <el-col :span="4">
-          <div>
-            <el-button type="info" size="small" round style="margin-right: 10px" @click="handleExport">导出</el-button>
-            <el-button type="info" size="small" round>打印</el-button>
-          </div>
-        </el-col>
-        <el-col :span="14">
-          <div class="block">
-            <el-pagination
-              @size-change="handleSizeChange"
-              @current-change="handleCurrentChange"
-              :current-page="currentPage"
-              :page-sizes="[10, 20, 50, 100]"
-              :page-size="pageSize"
-              :total="totalCnt"
-              background
-              layout="sizes, prev, pager, next, jumper"
-            >
-            </el-pagination>
-          </div>
-        </el-col>
-      </el-row>
-    </div>
+    <table-bottom
+      :total-cnt="totalCnt"
+      @current-change="handleCurrentChange"
+      @size-change="handleSizeChange"
+      @print="handlePrint"
+      @export="handleExport"
+    />
   </div>
 </template>
 
 <script>
 import UserTableForm from '@/components/form/UserTableForm'
 import UserTable from '@/components/table/UserTable'
-import { getUserList, getUserListCsv } from '@/api/admin'
+import TableBottom from '@/components/tool/TableBottom'
+import { GetUserList, getUserListCsv } from '@/api/admin'
 import { DateFormat, DownloadCsvFile } from '@/utils'
 
 export default {
   name: 'index',
   components: {
     UserTableForm,
-    UserTable
+    UserTable,
+    TableBottom
   },
   created() {
     if (Date.prototype.format === undefined) {
@@ -82,7 +63,7 @@ export default {
      * @param {Object}data
      */
     queryData(data) {
-      getUserList(data).then(rsp => {
+      GetUserList(data).then(rsp => {
         const { data } = rsp
         console.log(data)
         this.tableData = data['user_info_list']
@@ -113,8 +94,8 @@ export default {
       }
       const data = {
         name: this.form.name,
-        gender: parseInt(this.form.gender),
-        age: parseInt(this.form.age),
+        gender: this.form.gender,
+        age: this.form.age,
         email: this.form.email,
         phone: this.form.phone,
         create_begin: left,
@@ -148,8 +129,25 @@ export default {
         DownloadCsvFile(data, '用户列表.csv')
       })
     },
-    printTable() {
-
+    handlePrint() {
+      let left, right
+      if (this.form.registerRange) {
+        left = this.form.registerRange[0].format('yyyy-MM-dd hh:mm:ss')
+        right = this.form.registerRange[1].format('yyyy-MM-dd hh:mm:ss')
+      }
+      const data = {
+        name: this.form.name,
+        gender: this.form.gender,
+        age: this.form.age,
+        email: this.form.email,
+        phone: this.form.phone,
+        create_begin: left,
+        create_end: right,
+        sort_fields: this.sortFields
+      }
+      // const routeData = this.$router.resolve({ name: 'UserTablePdf', params: { form: JSON.stringify(data) } })
+      // window.open(routeData.href, '_blank')
+      this.$router.push({ name: 'UserTablePdf', params: { form: JSON.stringify(data) } })
     }
   }
 }

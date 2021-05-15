@@ -8,16 +8,16 @@
         <el-input clearable v-model="form.email"/>
       </el-form-item>
       <el-form-item label="年龄">
-        <el-input clearable v-model="form.age"/>
+        <el-input clearable v-model.number="form.age"/>
       </el-form-item>
       <el-form-item label="手机号">
         <el-input clearable v-model="form.phone"/>
       </el-form-item>
       <el-form-item label="性别">
-        <el-select clearable v-model="form.gender">
-          <el-option label="男" value="1"/>
-          <el-option label="女" value="2"/>
-          <el-option label="其他" value="0"/>
+        <el-select clearable v-model.number="form.gender">
+          <el-option label="男" :value="1"/>
+          <el-option label="女" :value="2"/>
+          <el-option label="其他" :value="0"/>
         </el-select>
       </el-form-item>
       <el-form-item label="注册时间">

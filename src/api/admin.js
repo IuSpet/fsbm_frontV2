@@ -1,11 +1,11 @@
 import request from '@/utils/request'
 import Url from '@/utils/url'
 
-export function getUserList(data) {
+export function GetUserList(data) {
   return request({
     method: 'post',
     url: Url.admin.userList,
-    data,
+    data
   })
 }
 
@@ -18,11 +18,11 @@ export function getUserListCsv(data) {
   })
 }
 
-export function getUserListPDF(data) {
+export function GetUserListPdf(data) {
   return request({
     method: 'post',
     url: Url.admin.userListPrint,
-    data,
+    data
   })
 }
 
@@ -30,6 +30,6 @@ export function getUserRegisterInfo(data) {
   return request({
     method: 'post',
     url: Url.admin.userRegister,
-    data,
+    data
   })
 }

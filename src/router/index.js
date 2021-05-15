@@ -5,6 +5,7 @@ Vue.use(Router)
 
 /* Layout */
 import Layout from '@/layout'
+import PrintLayout from '@/layout/PrintLayout'
 
 /**
  * Note: sub-menu only appear when route children.length >= 1
@@ -193,12 +194,50 @@ export const constantRoutes = [
     component: Layout,
     children: [
       {
-        path: 'index',
+        path: '/index',
         component: () => import('@/views/profile/index'),
         name: 'Profile',
         meta: { title: '用户资料', icon: 'profile' }
       }
     ]
+  },
+
+  {
+    path: '/print',
+    component: PrintLayout,
+    children: [
+      {
+        path: '/user_table',
+        component: () => import('@/views/print/UserListPdf'),
+        name: 'UserTablePdf',
+        hidden: true
+      },
+      {
+        path: '/shop_table',
+        component: () => import('@/views/print/ShopListPdf'),
+        name: 'ShopTablePdf',
+        hidden: true
+      },
+      {
+        path: '/monitor_table',
+        component: () => import('@/views/print/MonitorListPdf'),
+        name: 'MonitorTablePdf',
+        hidden: true
+      },
+      {
+        path: '/alarm_table',
+        component: () => import('@/views/print/AlarmListPdf'),
+        name: 'AlarmTablePdf',
+        hidden: true
+      },
+      {
+        path: '/apply_table',
+        component: () => import('@/views/print/ApplyListPdf'),
+        name: 'ApplyTablePdf',
+        hidden: true
+      }
+    ],
+    hidden: true
   },
 
   // 404 page must be placed at the end !!!

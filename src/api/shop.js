@@ -57,10 +57,26 @@ export function ShopListCsv(data) {
   })
 }
 
+export function ShopListPdf(data) {
+  return request({
+    method: 'post',
+    url: Url.shop.shopListPrint,
+    data
+  })
+}
+
 export function MonitorListCsv(data) {
   return request({
     method: 'post',
     url: Url.shop.monitorListCsv,
+    data
+  })
+}
+
+export function MonitorListPdf(data) {
+  return request({
+    method: 'post',
+    url: Url.shop.monitorListPrint,
     data
   })
 }

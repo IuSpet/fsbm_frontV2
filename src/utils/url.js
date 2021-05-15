@@ -30,7 +30,9 @@ const Url = {
     liveWallSrc: '/shop/device/live_wall_src',
     shopListByEmail: '/shop/shop_list_by_email',
     shopListCsv: '/shop/shop_list/csv',
-    monitorListCsv: '/shop/device/monitor_list/csv'
+    shopListPrint: '/shop/shop_list/print',
+    monitorListCsv: '/shop/device/monitor_list/csv',
+    monitorListPrint: '/shop/device/monitor_list/print'
   },
   auth: {
     roleList: '/auth/role_list',
@@ -38,6 +40,7 @@ const Url = {
     applyRole: '/auth/apply_role',
     applyOrderList: '/auth/apply_order_list',
     applyOrderListCsv: '/auth/apply_order_list/csv',
+    applyOrderListPrint: '/auth/apply_order_list/print',
     reviewOrder: '/auth/review_order'
   },
   dashboard: {
@@ -46,7 +49,8 @@ const Url = {
   },
   alarm: {
     alarmList: '/alarm/alarm_list',
-    alarmListCsv: '/alarm/alarm_list/csv'
+    alarmListCsv: '/alarm/alarm_list/csv',
+    alarmListPrint: '/alarm/alarm_list/print'
   }
 }
 
