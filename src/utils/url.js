@@ -43,6 +43,10 @@ const Url = {
   dashboard: {
     globalStats: '/dashboard/global_stats',
     shopList: '/dashboard/shop_list'
+  },
+  alarm: {
+    alarmList: '/alarm/alarm_list',
+    alarmListCsv: '/alarm/alarm_list/csv'
   }
 }
 

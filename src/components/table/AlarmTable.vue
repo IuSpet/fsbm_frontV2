@@ -11,7 +11,7 @@
       @sort-change="handleSortChange"
       :header-cell-style="handleHeaderStyle"
     >
-      <el-table-column label="店铺名称" prop="Name" width="175" align="center" sortable="custom">
+      <el-table-column label="店铺名称" prop="ShopName" width="175" align="center" sortable="custom">
         <template slot-scope="scope">
           {{ scope.row.shop_name }}
         </template>
@@ -31,7 +31,7 @@
           {{ scope.row.addr }}
         </template>
       </el-table-column>
-      <el-table-column label="报警内容" prop="Addr" width="150" align="center" sortable="custom">
+      <el-table-column label="报警内容" prop="AlarmContent" width="150" align="center" sortable="custom">
         <template slot-scope="scope">
           {{ scope.row.alarm_content }}
         </template>
@@ -41,7 +41,7 @@
           {{ scope.row.alarm_at }}
         </template>
       </el-table-column>
-      <el-table-column label="详情" prop="Status" width="150" align="center" sortable="custom">
+      <el-table-column label="详情" prop="detail" width="150" align="center" sortable="custom">
         <template slot-scope="scope">
           <el-button @click="handleClick(scope.row.alarm_id)" type="text" size="small">报警详情</el-button>
         </template>
