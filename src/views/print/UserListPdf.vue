@@ -16,9 +16,9 @@ export default {
   },
   data() {
     return {
-      form: JSON.parse(this.$route.params.form),
       tableData: [],
-      loading: false
+      loading: false,
+      form: this.initForm()
     }
   },
   mounted() {
@@ -31,15 +31,22 @@ export default {
       GetUserListPdf(this.form).then(rsp => {
         const { data } = rsp
         document.title = '用户列表'
-        this.tableData = data['list']
+        this.tableData = data['user_info_list']
+        console.log(this.tableData)
+        this.loading = false
         setTimeout(() => {
           this.fullscreenLoading = false
           this.$nextTick(() => {
-            window.print()
+            // window.print()
           })
         }, 3000)
       })
-      this.loading = false
+    },
+    initForm() {
+      if (this.$route.params.form) {
+        return JSON.parse(this.$route.params.form)
+      }
+      return null
     }
   }
 }

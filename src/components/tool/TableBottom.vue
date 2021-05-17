@@ -57,6 +57,7 @@ export default {
      * @param size
      */
     handleSizeChange(size) {
+      this.pageSize = size
       this.$emit('size-change', size)
     },
     /**
@@ -64,6 +65,7 @@ export default {
      * @param current
      */
     handleCurrentChange(current) {
+      this.currentPage = current
       this.$emit('current-change', current)
     }
   }

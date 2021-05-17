@@ -13,9 +13,7 @@
     >
       <el-table-column label="店铺名称" prop="Name" width="175" align="center" sortable="custom">
         <template slot-scope="scope">
-          <el-button @click="handleClick(scope.row)" type="text" size="small">
-            {{ scope.row.name }}
-          </el-button>
+          {{ scope.row.name }}
         </template>
       </el-table-column>
       <el-table-column label="负责人" prop="AdminName" width="175" align="center" sortable="custom">
@@ -58,7 +56,7 @@ import { MappingStatus } from '@/utils'
 
 export default {
   mixins: [sort],
-  name: 'ShopTable',
+  name: 'ShopPrintTable',
   props: {
     dataLoading: {
       type: Boolean,

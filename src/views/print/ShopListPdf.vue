@@ -1,18 +1,18 @@
 <template>
   <div class="shop-list-pdf-container">
     <h2>店铺列表</h2>
-    <shopTable :data-loading="loading" :table-data="tableData"/>
+    <shop-print-table :data-loading="loading" :table-data="tableData"/>
   </div>
 </template>
 
 <script>
-import ShopTable from '@/components/table/ShopTable'
 import { ShopListPdf } from '@/api/shop'
+import ShopPrintTable from '@/components/table/ShopPrintTable'
 
 export default {
   name: 'ShopListPdf',
   components: {
-    ShopTable
+    ShopPrintTable
   },
   data() {
     return {

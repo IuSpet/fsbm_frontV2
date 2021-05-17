@@ -3,12 +3,13 @@
     <el-row :gutter="50">
       <el-col class="info-col" :span="12">
         <h2>基本信息</h2>
-        <shop-info-list/>
+        <shop-info-list :shop-id="shopId"/>
         <point-map class="point-map"/>
       </el-col>
       <el-col :span="12">
         <h2>店铺内监控</h2>
         <device-player-form :shop-id="shopId"/>
+        <shop-alarm-table :shop_id="shopId"/>
       </el-col>
     </el-row>
   </div>
@@ -19,6 +20,7 @@ import LivePlayer from '@/components/player/LivePlayer'
 import ShopInfoList from '@/components/list/ShopInfoList'
 import PointMap from '@/components/map/PointMap'
 import DevicePlayerForm from '@/components/form/DevicePlayerForm'
+import ShopAlarmTable from '@/components/table/ShopAlarmTable'
 
 export default {
   name: 'shopDetail',
@@ -26,7 +28,8 @@ export default {
     LivePlayer,
     ShopInfoList,
     PointMap,
-    DevicePlayerForm
+    DevicePlayerForm,
+    ShopAlarmTable
   },
   data() {
     return {

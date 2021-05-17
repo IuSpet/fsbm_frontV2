@@ -20,69 +20,69 @@
         <el-input v-model.number="form.latitude" placeholder="经度" style="width: 120px; margin-right: 10px"/>
         <el-input v-model.number="form.longitude" placeholder="纬度" style="width: 120px"/>
       </el-form-item>
-      <el-form-item label="普通报警">
-        <el-switch v-model="notice.info.switch" active-color="#13ce66" inactive-color="#ff4949"/>
-        <el-tooltip effect="light" :content="infoTip" placement="right">
-          <i class="el-icon-info"/>
-        </el-tooltip>
-      </el-form-item>
-      <el-form-item label="普通配置" v-if="notice.info.switch">
-        <el-input
-          v-model.number="notice.info.threshold"
-          style="width: 100px;margin-right: 10px"
-          placeholder="报警阈值"
-        />
-        <el-cascader
-          v-model="notice.info.noticeRange"
-          :options="options"
-          :props="props"
-          collapse-tags
-          clearable
-          placeholder="报警范围"
-        />
-      </el-form-item>
-      <el-form-item label="危险报警">
-        <el-switch v-model="notice.warn.switch" active-color="#13ce66" inactive-color="#ff4949"/>
-        <el-tooltip effect="light" :content="warnTip" placement="right">
-          <i class="el-icon-info"/>
-        </el-tooltip>
-      </el-form-item>
-      <el-form-item label="危险配置" v-if="notice.warn.switch">
-        <el-input
-          v-model.number="notice.warn.threshold"
-          style="width: 100px;margin-right: 10px"
-          placeholder="报警阈值"
-        />
-        <el-cascader
-          v-model="notice.warn.noticeRange"
-          :options="options"
-          :props="props"
-          collapse-tags
-          clearable
-          placeholder="报警范围"
-        />
-      </el-form-item>
-      <el-form-item label="严重报警">
-        <el-switch v-model="notice.error.switch" active-color="#13ce66" inactive-color="#ff4949"/>
-        <el-tooltip effect="light" :content="errorTip" placement="right">
-          <i class="el-icon-info"/>
-        </el-tooltip>
-      </el-form-item>
-      <el-form-item label="严重配置" v-if="notice.error.switch">
-        <el-input
-          v-model.number="notice.error.threshold"
-          style="width: 100px;margin-right: 10px"
-          placeholder="报警阈值"
-        />
-        <el-cascader
-          v-model="notice.error.noticeRange"
-          :options="options"
-          :props="props"
-          collapse-tags
-          clearable
-          placeholder="报警范围"
-        />
-      </el-form-item>
+<!--      <el-form-item label="普通报警">-->
+<!--        <el-switch v-model="notice.info.switch" active-color="#13ce66" inactive-color="#ff4949"/>-->
+<!--        <el-tooltip effect="light" :content="infoTip" placement="right">-->
+<!--          <i class="el-icon-info"/>-->
+<!--        </el-tooltip>-->
+<!--      </el-form-item>-->
+<!--      <el-form-item label="普通配置" v-if="notice.info.switch">-->
+<!--        <el-input-->
+<!--          v-model.number="notice.info.threshold"-->
+<!--          style="width: 100px;margin-right: 10px"-->
+<!--          placeholder="报警阈值"-->
+<!--        />-->
+<!--        <el-cascader-->
+<!--          v-model="notice.info.noticeRange"-->
+<!--          :options="options"-->
+<!--          :props="props"-->
+<!--          collapse-tags-->
+<!--          clearable-->
+<!--          placeholder="报警范围"-->
+<!--        />-->
+<!--      </el-form-item>-->
+<!--      <el-form-item label="危险报警">-->
+<!--        <el-switch v-model="notice.warn.switch" active-color="#13ce66" inactive-color="#ff4949"/>-->
+<!--        <el-tooltip effect="light" :content="warnTip" placement="right">-->
+<!--          <i class="el-icon-info"/>-->
+<!--        </el-tooltip>-->
+<!--      </el-form-item>-->
+<!--      <el-form-item label="危险配置" v-if="notice.warn.switch">-->
+<!--        <el-input-->
+<!--          v-model.number="notice.warn.threshold"-->
+<!--          style="width: 100px;margin-right: 10px"-->
+<!--          placeholder="报警阈值"-->
+<!--        />-->
+<!--        <el-cascader-->
+<!--          v-model="notice.warn.noticeRange"-->
+<!--          :options="options"-->
+<!--          :props="props"-->
+<!--          collapse-tags-->
+<!--          clearable-->
+<!--          placeholder="报警范围"-->
+<!--        />-->
+<!--      </el-form-item>-->
+<!--      <el-form-item label="严重报警">-->
+<!--        <el-switch v-model="notice.error.switch" active-color="#13ce66" inactive-color="#ff4949"/>-->
+<!--        <el-tooltip effect="light" :content="errorTip" placement="right">-->
+<!--          <i class="el-icon-info"/>-->
+<!--        </el-tooltip>-->
+<!--      </el-form-item>-->
+<!--      <el-form-item label="严重配置" v-if="notice.error.switch">-->
+<!--        <el-input-->
+<!--          v-model.number="notice.error.threshold"-->
+<!--          style="width: 100px;margin-right: 10px"-->
+<!--          placeholder="报警阈值"-->
+<!--        />-->
+<!--        <el-cascader-->
+<!--          v-model="notice.error.noticeRange"-->
+<!--          :options="options"-->
+<!--          :props="props"-->
+<!--          collapse-tags-->
+<!--          clearable-->
+<!--          placeholder="报警范围"-->
+<!--        />-->
+<!--      </el-form-item>-->
       <el-form-item label="备注">
         <el-input
           type="textarea"

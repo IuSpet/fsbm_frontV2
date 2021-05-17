@@ -25,6 +25,8 @@ const Url = {
   shop: {
     shopList: '/shop/shop_list',
     addShop: '/shop/add_shop',
+    shopInfo: '/shop/shop_info',
+    shopAlarmList: 'shop/shop_info/alarm_list',
     addMonitor: '/shop/device/add_monitor',
     monitorList: '/shop/device/monitor_list',
     liveWallSrc: '/shop/device/live_wall_src',

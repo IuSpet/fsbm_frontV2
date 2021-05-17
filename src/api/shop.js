@@ -17,6 +17,22 @@ export function AddShop(data) {
   })
 }
 
+export function ShopInfo(data) {
+  return request({
+    method: 'post',
+    url: Url.shop.shopInfo,
+    data
+  })
+}
+
+export function ShopAlarmList(data) {
+  return request({
+    method: 'post',
+    url: Url.shop.shopAlarmList,
+    data
+  })
+}
+
 export function AddMonitor(data) {
   return request({
     method: 'post',
