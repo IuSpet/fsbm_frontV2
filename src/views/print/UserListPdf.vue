@@ -1,18 +1,18 @@
 <template>
   <div class="user-list-pdf-container">
     <h2>用户列表</h2>
-    <user-table :table-data="tableData" :data-loading="loading"/>
+    <user-print-table :table-data="tableData" :data-loading="loading"/>
   </div>
 </template>
 
 <script>
-import UserTable from '@/components/table/UserTable'
+import UserPrintTable from '@/components/table/UserPrintTable'
 import { GetUserListPdf } from '@/api/admin'
 
 export default {
   name: 'UserListPdf',
   components: {
-    UserTable
+    UserPrintTable
   },
   data() {
     return {
@@ -37,7 +37,7 @@ export default {
         setTimeout(() => {
           this.fullscreenLoading = false
           this.$nextTick(() => {
-            // window.print()
+            window.print()
           })
         }, 3000)
       })

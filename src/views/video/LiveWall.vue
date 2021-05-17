@@ -9,22 +9,40 @@
             :video-type="info.video_type"
             :video-src="info.video_src"
           />
-          <p class="player-description">{{ info.shop_name }}: {{ info.device_name }}</p>
+          <p class="player-description">{{ info.shop_name }}: {{ info.monitor_name }}</p>
         </div>
       </el-col>
       <el-col :sm="24" :md="12" :lg="8" :xl="6">
-        <div class="wall-item">
-          <live-player class="player" player-id="player_2"/>
+        <div v-for="(info,index) in deviceFilter(1)" class="wall-item">
+          <live-player
+            class="player"
+            :player-id="'player_0_'+index"
+            :video-type="info.video_type"
+            :video-src="info.video_src"
+          />
+          <p class="player-description">{{ info.shop_name }}: {{ info.monitor_name }}</p>
         </div>
       </el-col>
       <el-col :sm="24" :md="12" :lg="8" :xl="6">
-        <div class="wall-item">
-          <live-player class="player" player-id="player_3"/>
+        <div v-for="(info,index) in deviceFilter(2)" class="wall-item">
+          <live-player
+            class="player"
+            :player-id="'player_0_'+index"
+            :video-type="info.video_type"
+            :video-src="info.video_src"
+          />
+          <p class="player-description">{{ info.shop_name }}: {{ info.monitor_name }}</p>
         </div>
       </el-col>
       <el-col :sm="24" :md="12" :lg="8" :xl="6">
-        <div class="wall-item">
-          <live-player class="player" player-id="player_4"/>
+        <div v-for="(info,index) in deviceFilter(3)" class="wall-item">
+          <live-player
+            class="player"
+            :player-id="'player_0_'+index"
+            :video-type="info.video_type"
+            :video-src="info.video_src"
+          />
+          <p class="player-description">{{ info.shop_name }}: {{ info.monitor_name }}</p>
         </div>
       </el-col>
     </el-row>
@@ -33,6 +51,7 @@
 
 <script>
 import LivePlayer from '@/components/player/LivePlayer'
+import { LiveWallSrc } from '@/api/shop'
 
 export default {
   name: 'LiveWall',
@@ -46,7 +65,10 @@ export default {
   },
   methods: {
     queryDeviceList() {
-      //todo 查询监控设备源列表
+      LiveWallSrc(null).then(rsp => {
+        const { data } = rsp
+        this.deviceList = data['list']
+      })
     },
     /**
      * 根据基数除以4取余筛选
