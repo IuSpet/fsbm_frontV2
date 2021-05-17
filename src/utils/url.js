@@ -23,7 +23,8 @@ const Url = {
     userRegister: '/admin/user_register/line_chart',
     userInfo: '/admin/user_detail',
     addUserRole: '/admin/user_role/add',
-    deleteUserRole: '/admin/user_role/delete'
+    deleteUserRole: '/admin/user_role/delete',
+    userOperationList: '/admin/user_operation_list'
   },
   shop: {
     shopList: '/shop/shop_list',

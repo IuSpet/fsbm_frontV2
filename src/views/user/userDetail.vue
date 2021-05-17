@@ -34,7 +34,6 @@ export default {
       // console.log(this.userId)
       this.$router.push({ path: '/404' })
     }
-    this.queryRoles()
   }
   ,
   methods: {}

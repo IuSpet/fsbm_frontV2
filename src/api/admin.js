@@ -57,3 +57,11 @@ export function DeleteUserRole(data) {
     data
   })
 }
+
+export function UserOperationList(data) {
+  return request({
+    method: 'post',
+    url: Url.admin.userOperationList,
+    data
+  })
+}

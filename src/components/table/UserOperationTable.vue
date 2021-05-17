@@ -27,6 +27,8 @@
 </template>
 
 <script>
+import { UserOperationList } from '@/api/admin'
+
 export default {
   name: 'UserOperationTable',
   props: {
@@ -44,6 +46,14 @@ export default {
   methods: {
     queryData() {
       this.loading = true
+      const data = {
+        user_id: this.userId
+      }
+      UserOperationList(data).then(rsp => {
+        const { data } = rsp
+        this.tableData = data['list']
+      })
+      this.loading = false
     }
   }
 }

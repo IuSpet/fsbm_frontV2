@@ -15,10 +15,10 @@
       </el-form-item>
       <el-form-item label="过期时间" prop="expire">
         <el-select v-model="addRoleForm.expire" placeholder="选择过期时间">
-          <el-option label="7天" value="7 * 24 * 3600"/>
-          <el-option label="30天" value="30 * 24 * 3600"/>
-          <el-option label="180天" value="180 * 24 * 3600"/>
-          <el-option label="365天" value="365 * 24 * 3600"/>
+          <el-option label="7天" :value="7 * 24 * 3600"/>
+          <el-option label="30天" :value="30 * 24 * 3600"/>
+          <el-option label="180天" :value="180 * 24 * 3600"/>
+          <el-option label="365天" :value="365 * 24 * 3600"/>
         </el-select>
       </el-form-item>
       <el-button class="submit-button" type="primary" @click="handleAddRole">增加</el-button>
@@ -60,12 +60,12 @@ export default {
     return {
       addRoleForm: {
         UserId: this.userId,
-        roleId: -1,
-        expire: 30 * 24 * 3600
+        roleId: null,
+        expire: null
       },
       deleteRoleForm: {
         UserId: this.userId,
-        roleId: -1
+        roleId: null
       },
       roles: []
     }
@@ -83,14 +83,14 @@ export default {
     handleAddRole() {
       this.$emit('add-role', this.addRoleForm)
       this.addRoleForm = {
-        roleId: -1,
-        expire: 30 * 24 * 3600
+        roleId: null,
+        expire: null
       }
     },
     handleDeleteRole() {
       this.$emit('delete-role', this.deleteRoleForm)
       this.deleteRoleForm = {
-        roleId: -1
+        roleId: null
       }
     }
   }
