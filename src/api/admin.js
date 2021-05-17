@@ -33,3 +33,27 @@ export function getUserRegisterInfo(data) {
     data
   })
 }
+
+export function UserInfo(data) {
+  return request({
+    method: 'post',
+    url: Url.admin.userInfo,
+    data
+  })
+}
+
+export function AddUserRole(data) {
+  return request({
+    method: 'post',
+    url: Url.admin.addUserRole,
+    data
+  })
+}
+
+export function DeleteUserRole(data) {
+  return request({
+    method: 'post',
+    url: Url.admin.deleteUserRole,
+    data
+  })
+}

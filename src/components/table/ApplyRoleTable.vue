@@ -84,6 +84,7 @@ export default {
     tableData: {
       type: Array,
       default: () => {
+        return {}
       }
     }
   },

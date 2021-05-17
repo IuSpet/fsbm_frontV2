@@ -20,7 +20,10 @@ const Url = {
     userList: '/admin/user_list',
     userListCsv: '/admin/user_list/csv',
     userListPrint: '/admin/user_list/print',
-    userRegister: '/admin/user_register/line_chart'
+    userRegister: '/admin/user_register/line_chart',
+    userInfo: '/admin/user_detail',
+    addUserRole: '/admin/user_role/add',
+    deleteUserRole: '/admin/user_role/delete'
   },
   shop: {
     shopList: '/shop/shop_list',

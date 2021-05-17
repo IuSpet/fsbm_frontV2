@@ -1,19 +1,21 @@
 <template>
   <div class="user-table-container">
     <el-table
-        v-loading="dataLoading"
-        element-loading-text="Loading"
-        :data="tableData"
-        border
-        fit
-        highlight-current-row
-        style="width: 100%"
-        @sort-change="handleSortChange"
-        :header-cell-style="handleHeaderStyle"
+      v-loading="dataLoading"
+      element-loading-text="Loading"
+      :data="tableData"
+      border
+      fit
+      highlight-current-row
+      style="width: 100%"
+      @sort-change="handleSortChange"
+      :header-cell-style="handleHeaderStyle"
     >
       <el-table-column label="用户名" prop="Name" width="175" align="center" sortable="custom">
         <template slot-scope="scope">
-          {{ scope.row.name }}
+          <el-button @click="handleClick(scope.row)" type="text" size="small">
+            {{ scope.row.name }}
+          </el-button>
         </template>
       </el-table-column>
       <el-table-column label="邮箱" prop="Email" width="175" align="center" sortable="custom">
@@ -74,6 +76,11 @@ export default {
         1: 'danger'
       }
       return statusMap[MappingStatus(status)]
+    }
+  },
+  methods: {
+    handleClick(row) {
+      this.$router.push({ name: 'UserDetail', query: { id: row.id } })
     }
   }
 }
