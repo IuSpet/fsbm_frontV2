@@ -40,7 +40,9 @@
           show-word-limit
         />
       </el-form-item>
-      <el-button :loading="loading" type="primary" @click.native.prevent="handleClick">注册</el-button>
+      <div class="button-container">
+        <el-button :loading="loading" type="primary" @click.native.prevent="handleClick">注册</el-button>
+      </div>
     </el-form>
   </div>
 </template>
@@ -136,10 +138,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.monitor-form-container{
+.monitor-form-container {
   padding: 20px;
   width: 50%;
 }
+
 .my-autocomplete {
   li {
     line-height: normal;
@@ -157,5 +160,13 @@ export default {
   }
 }
 
+.button-container {
+  height: auto;
+  width: 150px;
+  margin: 0 auto;
 
+  button {
+    width: 150px;
+  }
+}
 </style>

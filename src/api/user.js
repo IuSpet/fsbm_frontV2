@@ -33,7 +33,7 @@ export function login1(data) {
   })
 }
 
-export function modifyUserProfile(data) {
+export function ModifyUserProfile(data) {
   return request({
     url: Url.user.modify,
     method: 'post',

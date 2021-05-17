@@ -7,14 +7,17 @@
       <el-form-item label="用户名" prop="name">
         <el-input v-model="form.name" ref="name"/>
       </el-form-item>
+      <el-form-item label="手机号" prop="phone">
+        <el-input v-model="form.phone" ref="phone"/>
+      </el-form-item>
       <el-form-item label="年龄" prop="age">
         <el-input v-model.number="form.age" ref="age" auto-complete="off"/>
       </el-form-item>
       <el-form-item label="性别">
         <el-radio-group v-model="form.gender">
-          <el-radio border label="男"/>
-          <el-radio border label="女"/>
-          <el-radio border label="其他"/>
+          <el-radio border :label="1">男</el-radio>
+          <el-radio border :label="2">女</el-radio>
+          <el-radio border :label="0">其他</el-radio>
         </el-radio-group>
       </el-form-item>
       <el-form-item label="密码" prop="password">
@@ -33,13 +36,14 @@
           placeholder="再次输入密码"
           type="password"
           name="password"
-          @keyup.enter.native=""
         ></el-input>
       </el-form-item>
       <el-form-item label="验证码">
-        <el-input>
-
-        </el-input>
+        <el-input
+          v-model="form.verificationCode"
+          type="text"
+          name="verificationCode"
+        />
       </el-form-item>
       <div class="button-container">
         <el-button :disabled="verification.hasSent" type="info" @click.native.prevent="handleSend">
@@ -55,7 +59,7 @@
 <script>
 import { validPassword } from '@/utils/validate'
 import { getEmail } from '@/utils/auth'
-import { getUserProfile } from '@/api/user'
+import { getUserProfile, ModifyUserProfile } from '@/api/user'
 
 export default {
   name: 'index',
@@ -73,13 +77,14 @@ export default {
         return
       }
       if (!validPassword(value)) {
-        callback(new Error('密码需要包含字母数字'))
+        callback(new Error('密码需要包含字母数字，至少8位'))
       } else {
         callback()
       }
     }
     const validatePasswordCheck = (rule, value, callback) => {
-      if (this.form.password.length === 0){
+      console.log('into validator')
+      if (this.form.password.length === 0) {
         callback()
         return
       }
@@ -93,8 +98,9 @@ export default {
       form: {
         name: '',
         email: '',
-        gender: 0,
-        age: '',
+        gender: null,
+        age: null,
+        phone: '',
         password: '',
         passwordCheck: '',
         verificationCode: ''
@@ -115,7 +121,6 @@ export default {
   },
   created() {
     this.getUserInfo()
-    this.oldForm = { ...this.form }
   },
   computed: {
     userEmail() {
@@ -130,7 +135,13 @@ export default {
       }
       this.loading = true
       getUserProfile(data).then(rsp => {
-        // todo:用户信息
+        const { data } = rsp
+        this.form.email = data.email
+        this.form.name = data.name
+        this.form.gender = data.gender
+        this.form.age = data.age
+        this.form.phone = data.phone
+        this.oldForm = { ...this.form }
         this.loading = false
       })
     },
@@ -146,7 +157,57 @@ export default {
       }, 60 * 1000)
     },
     handleModify() {
-
+      this.$refs.form.validate(valid => {
+        if (valid) {
+          switch (this.checkModifyType()) {
+            case 0:
+              break
+            case 1:
+              this.execModify()
+              break
+            case 2:
+              if (!this.form.verificationCode) {
+                this.$message({
+                  message: '请输入验证码',
+                  type: 'warning'
+                })
+                break
+              }
+              this.execModify()
+          }
+        }
+      })
+    },
+    execModify() {
+      const data = {
+        email: this.form.email,
+        name: this.form.name,
+        phone: this.form.phone,
+        password: this.form.password,
+        age: this.form.age,
+        gender: this.form.gender,
+        verify_code: this.form.verificationCode
+      }
+      ModifyUserProfile(data).then(() => {
+        this.$message({
+          message: '修改成功',
+          type: 'success'
+        })
+        this.getUserInfo()
+      })
+    },
+    checkModifyType() {
+      let type = 0
+      for (let k in this.form) {
+        if (this.form[k] !== this.oldForm[k]) {
+          type = 1
+          if (k === 'password') {
+            type = 2
+          }
+          break
+        }
+      }
+      return type
     }
   }
 }

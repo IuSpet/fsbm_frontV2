@@ -63,9 +63,13 @@ export default {
       deviceList: []
     }
   },
+  mounted() {
+    this.queryDeviceList()
+  },
   methods: {
     queryDeviceList() {
       LiveWallSrc(null).then(rsp => {
+        console.log(rsp)
         const { data } = rsp
         this.deviceList = data['list']
       })
