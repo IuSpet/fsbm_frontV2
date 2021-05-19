@@ -41,7 +41,7 @@ export function ModifyUserProfile(data) {
   })
 }
 
-export function deleteUser(data) {
+export function DeleteUser(data) {
   return request({
     url: Url.user.delete,
     method: 'post',
@@ -79,14 +79,6 @@ export function getRoles(data) {
     url: Url.user.getRoles,
     method: 'post',
     data
-  })
-}
-
-export function getInfo(token) {
-  return request({
-    url: '/vue-admin-template/user/info',
-    method: 'get',
-    params: { token }
   })
 }
 

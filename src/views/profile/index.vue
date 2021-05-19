@@ -59,7 +59,7 @@
 <script>
 import { validPassword } from '@/utils/validate'
 import { getEmail } from '@/utils/auth'
-import { getUserProfile, ModifyUserProfile } from '@/api/user'
+import { DeleteUser, getUserProfile, ModifyUserProfile } from '@/api/user'
 
 export default {
   name: 'index',
@@ -208,6 +208,32 @@ export default {
         }
       }
       return type
+    },
+    handleDelete() {
+      if (!this.form.verificationCode) {
+        this.$message({
+          message: '请输入验证码',
+          type: 'warning'
+        })
+        return
+      }
+      this.$confirm('删除用户后将无法登录，只能由管理员恢复，是否确认？', '警告', {
+        confirmButtonText: '确认删除',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        this.execDelete()
+      })
+    },
+    execDelete() {
+      const data = {
+        email: this.form.email,
+        verify_code: this.form.verificationCode
+      }
+      DeleteUser(data).then(async() => {
+        await this.$store.dispatch('user/logout')
+        this.$router.push(`/login`)
+      })
     }
   }
 }
