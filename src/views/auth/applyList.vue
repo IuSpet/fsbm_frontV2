@@ -203,6 +203,8 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
+.apply-list-container {
+  padding: 15px;
+}
 </style>

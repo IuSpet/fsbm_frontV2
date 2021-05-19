@@ -28,9 +28,7 @@ export default {
     }
   },
   created() {
-    //this.queryRoles()
-    this.activeRoles = [{ role: 'admin' }]
-    this.expiredRoles = [{ role: 'manager' }]
+    this.queryRoles()
   },
   methods: {
     handleApply(form) {
