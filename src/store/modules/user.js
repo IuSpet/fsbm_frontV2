@@ -81,7 +81,7 @@ const actions = {
       email: userInfo.email,
       phone: userInfo.phone,
       password: userInfo.password,
-      gender: MappingGender(userInfo.gender),
+      gender: userInfo.gender,
       age: userInfo.age
     }
     return new Promise((resolve, reject) => {

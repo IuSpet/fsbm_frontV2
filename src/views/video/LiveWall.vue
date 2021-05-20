@@ -16,7 +16,7 @@
         <div v-for="(info,index) in deviceFilter(1)" class="wall-item">
           <live-player
             class="player"
-            :player-id="'player_0_'+index"
+            :player-id="'player_1_'+index"
             :video-type="info.video_type"
             :video-src="info.video_src"
           />
@@ -27,7 +27,7 @@
         <div v-for="(info,index) in deviceFilter(2)" class="wall-item">
           <live-player
             class="player"
-            :player-id="'player_0_'+index"
+            :player-id="'player_2_'+index"
             :video-type="info.video_type"
             :video-src="info.video_src"
           />
@@ -38,7 +38,7 @@
         <div v-for="(info,index) in deviceFilter(3)" class="wall-item">
           <live-player
             class="player"
-            :player-id="'player_0_'+index"
+            :player-id="'player_3_'+index"
             :video-type="info.video_type"
             :video-src="info.video_src"
           />
@@ -66,6 +66,11 @@ export default {
   mounted() {
     this.queryDeviceList()
   },
+  computed: {
+    tmpList() {
+      return this.deviceFilter(0)
+    }
+  },
   methods: {
     queryDeviceList() {
       LiveWallSrc(null).then(rsp => {
@@ -79,15 +84,12 @@ export default {
      * @param {number}base
      */
     deviceFilter(base) {
-      return (base) => {
-        base = base % 4
-        return this.deviceList.filter(({ index }) => {
-          if (typeof base !== 'number') {
-            return false
-          }
-          return index % 4 === base
-        })
-      }
+      return this.deviceList.filter((e, index, a) => {
+        if (typeof base !== 'number') {
+          return false
+        }
+        return index % 4 === base
+      })
     }
   }
 }

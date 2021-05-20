@@ -17,8 +17,8 @@
         />
       </el-form-item>
       <el-form-item label="经纬度" prop="pos">
-        <el-input v-model.number="form.latitude" placeholder="经度" style="width: 120px; margin-right: 10px"/>
-        <el-input v-model.number="form.longitude" placeholder="纬度" style="width: 120px"/>
+        <el-input v-model="form.latitude" placeholder="经度" style="width: 120px; margin-right: 10px"/>
+        <el-input v-model="form.longitude" placeholder="纬度" style="width: 120px"/>
       </el-form-item>
       <el-form-item label="备注">
         <el-input
@@ -44,7 +44,9 @@ export default {
   name: 'AddShopForm',
   data() {
     const validatePos = (rule, value, callback) => {
-      if (typeof this.form.latitude !== 'number' || typeof this.form.longitude !== 'number') {
+      this.form.latitude *= 1
+      this.form.longitude *= 1
+      if (isNaN(this.form.latitude) || isNaN(this.form.longitude)) {
         callback('经纬度必须是数字')
       } else if (this.form.latitude < -180 || this.form.latitude > 180) {
         callback('纬度范围-180到180')
@@ -130,7 +132,11 @@ export default {
       }
       AddShop(data).then(() => {
           // 成功后跳转首页
-          this.$router.push({ path: this.redirect || '/' })
+          this.$message({
+            message: '注册成功',
+            type: 'success'
+          })
+          // this.$router.push({ path: this.redirect || '/' })
         }
       )
     }

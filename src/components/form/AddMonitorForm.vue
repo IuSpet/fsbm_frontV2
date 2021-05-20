@@ -54,17 +54,23 @@ export default {
   name: 'AddMonitorForm',
   data() {
     const validateShop = (rule, value, callback) => {
-      if (!value || value.length === 0) {
-        console.log(value)
-        console.log(this.form.shopName)
+      if (value.length === 0){
         callback('店铺不能为空')
-      } else {
-        callback()
+        return
       }
+      const shop = this.shopList.filter(a=>{return a.shop_name === value})
+      if (shop.length === 0){
+        callback('请输入您拥有的店铺')
+        return
+      }
+      if (this.form.shopId === -1){
+        this.form.shopId = shop[0].shop_id
+      }
+      callback()
     }
     return {
       form: {
-        shopId: 0,
+        shopId: -1,
         shopName: '',
         monitorName: '',
         videoSrc: '',
@@ -72,7 +78,7 @@ export default {
       },
       shopList: [],
       rules: {
-        shopName: [{ required: true, trigger: 'change', message: '店铺不能为空' }],
+        shopName: [{ required: true, trigger: 'change', validator:validateShop }],
         monitorName: [{ required: true, trigger: 'blur', message: '监控名不能为空' }]
       },
       loading: false
@@ -125,6 +131,10 @@ export default {
           }
           AddMonitor(data).then(() => {
             this.loading = false
+            this.$message({
+              message: '注册成功',
+              type: 'success'
+            })
           }).catch(() => {
             this.loading = false
           })

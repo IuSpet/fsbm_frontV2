@@ -53,9 +53,9 @@
           <svg-icon icon-class="sex"/>
         </span>
         <el-radio-group v-model="registerForm.gender">
-          <el-radio border label="男" value="1"/>
-          <el-radio border label="女" value="2"/>
-          <el-radio border label="其他" value="0"/>
+          <el-radio border :label="1">男</el-radio>
+          <el-radio border :label="2">女</el-radio>
+          <el-radio border :label="0">其他</el-radio>
         </el-radio-group>
       </el-form-item>
       <el-form-item prop="password">
@@ -127,8 +127,8 @@ export default {
         name: '',
         password: '',
         passwordCheck: '',
-        age: '',
-        gender: '其他'
+        age: 0,
+        gender: 0
       },
       registerRules: {
         email: [{ required: true, trigger: 'blur', validator: validateEmail }],

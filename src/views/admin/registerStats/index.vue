@@ -71,15 +71,15 @@ export default {
   computed: {
     minDate() {
       if (this.selectDate.length < 1) {
-        return this.defaultBegin.format('yyyy-MM-dd')
+        return this.defaultBegin.format('yyyy-MM-dd hh:mm:ss')
       }
-      return this.selectDate[0].format('yyyy-MM-dd')
+      return this.selectDate[0].format('yyyy-MM-dd hh:mm:ss')
     },
     maxDate() {
       if (this.selectDate.length < 2) {
-        return this.defaultEnd.format('yyyy-MM-dd')
+        return this.defaultEnd.format('yyyy-MM-dd hh:mm:ss')
       }
-      return this.selectDate[1].format('yyyy-MM-dd')
+      return this.selectDate[1].format('yyyy-MM-dd hh:mm:ss')
     }
   }
 }
