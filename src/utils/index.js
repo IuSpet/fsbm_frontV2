@@ -204,6 +204,17 @@ export function MappingStatus(x) {
   }
 }
 
+export function MappingOrderStatus(x) {
+  switch (x) {
+    case '未审核':
+      return 0
+    case '通过':
+      return 1
+    case '拒绝':
+      return 2
+  }
+}
+
 /**
  * 将单词首字母大写
  * @param {string} word

@@ -60,7 +60,7 @@
         fixed="right"
       >
         <template slot-scope="scope">
-          <el-button @click="handleClick(scope.row)" type="text" size="small" :disabled="isReviewed(scope.row.id)">
+          <el-button @click="handleClick(scope.row)" type="text" size="small" :disabled="isReviewed(scope.row.status)">
             操作
           </el-button>
         </template>
@@ -71,7 +71,7 @@
 
 <script>
 import sort from '@/components/table/sort'
-import { MappingStatus } from '@/utils'
+import { MappingOrderStatus, MappingStatus } from '@/utils'
 
 export default {
   name: 'ApplyRoleTable',
@@ -95,7 +95,7 @@ export default {
         1: 'success',
         2: 'danger'
       }
-      return statusMap[MappingStatus(status)]
+      return statusMap[MappingOrderStatus(status)]
     }
   },
   methods: {
@@ -103,7 +103,7 @@ export default {
       this.$emit('review', item)
     },
     isReviewed(status) {
-      return status !== 0
+      return status !== '未审核'
     }
   }
 }

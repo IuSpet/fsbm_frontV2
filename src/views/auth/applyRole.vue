@@ -54,8 +54,10 @@ export default {
       }
       UserRoleList(data).then(rsp => {
         const { data } = rsp
-        this.activeRoles = data['active_roles'].map(a => a.role)
-        this.expiredRoles = data['expired_roles'].map(a => a.role)
+        console.log(data)
+        this.activeRoles = data['active_roles'].map((a) => a.role)
+        console.log(this.activeRoles)
+        this.expiredRoles = data['expired_roles'].map((a) => a.role)
       })
     }
   }

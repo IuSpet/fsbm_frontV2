@@ -43,7 +43,7 @@ service.interceptors.response.use(
   response => {
     // console.log(response)
     const res = response.data
-    if (res.type === 'application/octet-stream'){
+    if (res.type === 'application/octet-stream') {
       return res
     }
     // if the custom code is not 20000, it is judged as an error.
@@ -51,13 +51,12 @@ service.interceptors.response.use(
     // console.log(res)
     if (res.status !== 0) {
       Message({
-        message: res.message || 'Error',
+        message: res.msg || 'Error',
         type: 'error',
         duration: 5 * 1000
       })
 
-      // 50008: Illegal token; 50012: Other clients logged in; 50014: Token expired;
-      if (res.status === 3 || res.status === 50012 || res.status === 50014) {
+      if (res.status === 2005) {
         // to re-login
         MessageBox.confirm('You have been logged out, you can cancel to stay on this page, or log in again', 'Confirm logout', {
           confirmButtonText: 'Re-Login',

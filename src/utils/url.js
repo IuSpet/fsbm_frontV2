@@ -56,7 +56,8 @@ const Url = {
   alarm: {
     alarmList: '/alarm/alarm_list',
     alarmListCsv: '/alarm/alarm_list/csv',
-    alarmListPrint: '/alarm/alarm_list/print'
+    alarmListPrint: '/alarm/alarm_list/print',
+    alarmInfo: '/alarm/alarm_info'
   }
 }
 

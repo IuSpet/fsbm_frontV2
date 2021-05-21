@@ -2,7 +2,7 @@
   <div class="role-board-container">
     <h2>{{ boardTitle }}</h2>
     <div class="role-container">
-      <el-tag v-for="role in roleList" :type="boardType">{{ role.role }}</el-tag>
+      <el-tag v-for="role in roleList" :type="boardType">{{ role }}</el-tag>
     </div>
   </div>
 </template>

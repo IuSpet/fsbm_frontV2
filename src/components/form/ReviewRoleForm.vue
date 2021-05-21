@@ -1,6 +1,6 @@
 <template>
   <div class="review-role-form-container">
-    <el-form ref="form" :model="form" :rules="rules" label-width="80px">
+    <el-form ref="form" :model="form" label-width="80px">
       <el-form-item label="审核">
         <el-radio-group v-model="form.review">
           <el-radio :label="0">通过</el-radio>
@@ -18,12 +18,23 @@
 <script>
 export default {
   name: 'ReviewRoleForm',
+  props: {
+    info: {
+      type: Object,
+      default: () => {
+        return {
+          id: -1
+        }
+      }
+    }
+  },
   data() {
     return {
       form: {
-        id: -1,
+        id: this.info.id,
         review: 0,
-        reason: ''
+        reason: '',
+        reviewer: this.$store.getters.email
       }
     }
   },

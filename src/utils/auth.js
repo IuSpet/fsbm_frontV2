@@ -27,7 +27,6 @@ export function removeEmail() {
   return Cookies.remove(EmailKey)
 }
 
-
 /**
  * 判断用户是否有页面权限
  * @param {Array}userRoles
@@ -35,17 +34,20 @@ export function removeEmail() {
  * @return {boolean}
  * @constructor
  */
-export function HasAccessRole(userRoles,pageRoles){
-  if (!pageRoles){
+export function HasAccessRole(userRoles, pageRoles) {
+  console.log(userRoles)
+  console.log(pageRoles)
+  if (!pageRoles) {
     return true
   }
-  if (pageRoles.length === 0){
+  if (pageRoles.length === 0) {
     return true
   }
-  for (let i of pageRoles){
-    for (let j of userRoles){
+  for (let i of pageRoles) {
+    for (let j of userRoles) {
       if (i === j) return true
     }
   }
+  console.log('false')
   return false
 }

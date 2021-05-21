@@ -50,7 +50,7 @@
         />
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="$emit('query-list',form)">查询</el-button>
+        <el-button type="primary" @click="$emit('query',form)">查询</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -66,7 +66,7 @@ export default {
       form: {
         user: '',
         role: [],
-        status: [],
+        status: [0],
         applyRange: null,
         reviewRange: null,
         reviewer: ''

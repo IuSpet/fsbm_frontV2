@@ -22,7 +22,7 @@
     >
       <div class="review-drawer">
         <apply-role-list :info="adjustRow"/>
-        <review-role-form @submit-review="handleSubmitReview"/>
+        <review-role-form :info="adjustRow" @submit-review="handleSubmitReview"/>
       </div>
     </el-drawer>
   </div>
@@ -75,6 +75,7 @@ export default {
   methods: {
     handleQuery(form) {
       this.form = form
+      console.log('1233213')
       this.queryData()
     },
     handleSortChange(sortFields) {

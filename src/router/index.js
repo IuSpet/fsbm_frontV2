@@ -33,11 +33,6 @@ import PrintLayout from '@/layout/PrintLayout'
  */
 export const constantRoutes = [
   {
-    path: '/demo',
-    component: () => import('@/components/player/LivePlayer'),
-    hidden: true
-  },
-  {
     path: '/login',
     component: () => import('@/views/login/index'),
     hidden: true
@@ -70,7 +65,7 @@ export const constantRoutes = [
         path: 'live_wall',
         name: 'LiveWall',
         component: () => import('@/views/video/LiveWall'),
-        meta: { title: '监控墙', icon: 'monitor' }
+        meta: { title: '监控墙', icon: 'monitor', roles: ['admin', 'shop_owner', 'supervision', 'normal_user'] }
       }
     ]
   },
@@ -80,25 +75,25 @@ export const constantRoutes = [
     component: Layout,
     redirect: '/admin/stats',
     name: 'Admin',
-    meta: { title: '管理员', icon: 'admin', roles: ['admin'] },
+    meta: { title: '管理员', icon: 'admin', roles: ['admin', 'supervision'] },
     children: [
       {
         path: 'stats',
         name: 'Stats',
         component: () => import('@/views/admin/registerStats/index'),
-        meta: { title: '注册用户统计', icon: 'register-stats', roles: ['admin'] }
+        meta: { title: '注册用户统计', icon: 'register-stats', roles: ['admin', 'supervision'] }
       },
       {
         path: 'user_list',
         name: 'UserList',
         component: () => import('@/views/admin/userTable/index'),
-        meta: { title: '用户列表', icon: 'table', roles: ['admin'] }
+        meta: { title: '用户列表', icon: 'table', roles: ['admin', 'supervision'] }
       },
       {
         path: 'user_detail',
         name: 'UserDetail',
         component: () => import('@/views/user/userDetail'),
-        meta: { title: '用户详细信息', icon: 'profile', roles: ['admin'] },
+        meta: { title: '用户详细信息', icon: 'profile', roles: ['admin', 'supervision'] },
         hidden: true
       }
     ]
@@ -121,7 +116,7 @@ export const constantRoutes = [
         path: 'add_shop',
         name: 'AddShop',
         component: () => import('@/views/shop/addShop'),
-        meta: { title: '注册店铺', icon: 'register', roles: ['admin', 'manager'] }
+        meta: { title: '注册店铺', icon: 'register', roles: ['admin', 'shop_owner'] }
       },
       {
         path: 'monitor_list',
@@ -133,7 +128,7 @@ export const constantRoutes = [
         path: 'add_monitor',
         name: 'AddMonitor',
         component: () => import('@/views/shop/addMonitor'),
-        meta: { title: '注册监控', icon: 'register', roles: ['admin', 'manager'] }
+        meta: { title: '注册监控', icon: 'register', roles: ['admin', 'shop_owner'] }
       },
       {
         path: 'shop_detail',
@@ -185,7 +180,7 @@ export const constantRoutes = [
         path: '/apply_list',
         name: 'ApplyList',
         component: () => import('@/views/auth/applyList'),
-        meta: { title: '工单列表', icon: 'table', roles: ['admin'] }
+        meta: { title: '工单列表', icon: 'table', roles: ['admin', 'supervision'] }
       }
     ]
   },

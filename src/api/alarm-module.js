@@ -24,3 +24,11 @@ export function AlarmListPdf(data) {
     data
   })
 }
+
+export function AlarmInfo(data) {
+  return request({
+    method: 'post',
+    url: Url.alarm.alarmInfo,
+    data
+  })
+}
