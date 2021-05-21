@@ -24,7 +24,8 @@ const Url = {
     userInfo: '/admin/user_detail',
     addUserRole: '/admin/user_role/add',
     deleteUserRole: '/admin/user_role/delete',
-    userOperationList: '/admin/user_operation_list'
+    userOperationList: '/admin/user_operation_list',
+    modifyUserInfo: '/admin/user_info/modify'
   },
   shop: {
     shopList: '/shop/shop_list',

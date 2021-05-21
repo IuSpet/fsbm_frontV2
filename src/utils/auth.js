@@ -35,8 +35,8 @@ export function removeEmail() {
  * @constructor
  */
 export function HasAccessRole(userRoles, pageRoles) {
-  console.log(userRoles)
-  console.log(pageRoles)
+  // console.log(userRoles)
+  // console.log(pageRoles)
   if (!pageRoles) {
     return true
   }
@@ -48,6 +48,5 @@ export function HasAccessRole(userRoles, pageRoles) {
       if (i === j) return true
     }
   }
-  console.log('false')
   return false
 }

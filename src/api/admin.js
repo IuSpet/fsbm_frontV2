@@ -65,3 +65,11 @@ export function UserOperationList(data) {
     data
   })
 }
+
+export function ModifyUserInfo(data) {
+  return request({
+    method: 'post',
+    url: Url.admin.modifyUserInfo,
+    data
+  })
+}

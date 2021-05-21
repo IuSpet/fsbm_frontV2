@@ -37,6 +37,9 @@
 </template>
 
 <script>
+import { ModifyUserInfo } from '@/api/admin'
+import { MappingGender, MappingStatus } from '@/utils'
+
 export default {
   name: 'EditUserInfoForm',
   props: {
@@ -47,9 +50,26 @@ export default {
       }
     }
   },
+  data() {
+    return {
+      loading: false
+    }
+  },
   methods: {
     handleEdit() {
-
+      const data = {
+        id:this.form.id,
+        name:this.form.name,
+        age:this.form.age,
+        gender:MappingGender(this.form.gender),
+        stats:MappingStatus(this.form.status)
+      }
+      ModifyUserInfo(data).then(() => {
+        this.$message({
+          type: 'success',
+          message: '修改成功'
+        })
+      })
     }
   }
 }

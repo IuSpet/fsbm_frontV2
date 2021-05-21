@@ -10,7 +10,7 @@ const getDefaultState = () => {
     name: '',
     avatar: '',
     email: getEmail(),
-    roles: []
+    roles: null
   }
 }
 

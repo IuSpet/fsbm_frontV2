@@ -38,8 +38,7 @@ router.beforeEach(async(to, from, next) => {
         next()
       } else {
         try {
-          next('/404')
-          // next()
+          next('/401')
         } catch (error) {
           // remove token and go to login page to re-login
           await store.dispatch('user/resetToken')

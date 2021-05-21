@@ -2,19 +2,19 @@
   <div class="shop-info-list-container">
     <ul class="info-list">
       <li class="info-item">
-        店铺名称：{{ info.name }}
+        店铺名称：{{ info.shop_name }}
       </li>
       <li class="info-item">
         店铺地址：{{ info.addr }}
       </li>
       <li class="info-item">
-        店铺负责人：{{ info.admin_name }}
+        店铺负责人：{{ info.user_name }}
       </li>
       <li class="info-item">
-        联系方式：{{ info.admin_phone }}
+        联系方式：{{ info.user_phone }}
       </li>
       <li class="info-item">
-        今日报警数量：{{ info.notice_cnt }}
+        今日报警数量：{{ info.alarm_cnt }}
       </li>
       <li class="info-item" v-if="email === info.admin_email">
         备注：{{ info.remark }}
@@ -29,21 +29,21 @@ import { ShopInfo } from '@/api/shop'
 export default {
   name: 'ShopInfoList',
   props: {
-    ShopId: {
+    shopId: {
       type: Number,
-      default: null
+      default: -1
     }
   },
   data() {
     return {
       email: this.$store.getters.email,
       info: {
-        name: '',
-        admin_name: '',
-        admin_phone: '',
-        admin_email: '',
+        shop_name: '',
+        user_name: '',
+        user_phone: '',
+        user_email: '',
         addr: '',
-        notice_cnt: ''
+        alarm_cnt: ''
       }
     }
   },
@@ -52,8 +52,9 @@ export default {
   },
   methods: {
     queryShopInfo() {
+      console.log(this.shopId)
       const data = {
-        shop_id: this.shop_id
+        shop_id: this.shopId
       }
       ShopInfo(data).then(rsp => {
         const { data } = rsp

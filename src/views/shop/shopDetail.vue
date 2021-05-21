@@ -9,7 +9,7 @@
       <el-col :span="12">
         <h2>店铺内监控</h2>
         <device-player-form :shop-id="shopId"/>
-        <shop-alarm-table :shop_id="shopId"/>
+        <shop-alarm-table :shop-id="shopId"/>
       </el-col>
     </el-row>
   </div>

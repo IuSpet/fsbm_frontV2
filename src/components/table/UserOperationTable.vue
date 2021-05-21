@@ -43,6 +43,9 @@ export default {
       tableData: []
     }
   },
+  created() {
+    this.queryData()
+  },
   methods: {
     queryData() {
       this.loading = true
