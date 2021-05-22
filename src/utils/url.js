@@ -39,7 +39,8 @@ const Url = {
     shopListCsv: '/shop/shop_list/csv',
     shopListPrint: '/shop/shop_list/print',
     monitorListCsv: '/shop/device/monitor_list/csv',
-    monitorListPrint: '/shop/device/monitor_list/print'
+    monitorListPrint: '/shop/device/monitor_list/print',
+    shopPos: '/shop/shop_pos'
   },
   auth: {
     roleList: '/auth/role_list',

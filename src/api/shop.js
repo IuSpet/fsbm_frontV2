@@ -96,3 +96,12 @@ export function MonitorListPdf(data) {
     data
   })
 }
+
+export function ShopPos(data) {
+  return request({
+    method: 'post',
+    url: Url.shop.shopPos,
+    data
+  })
+}
+

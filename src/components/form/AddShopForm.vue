@@ -111,25 +111,11 @@ export default {
       const data = {
         name: this.form.name,
         addr: this.form.addr,
-        notice_cfg: {
-          info: {
-            is_on: this.notice.info.switch,
-            threshold: this.notice.info.threshold,
-            notice_device: this.notice.info.noticeRange
-          },
-          warn: {
-            is_on: this.notice.warn.switch,
-            threshold: this.notice.warn.threshold,
-            notice_device: this.notice.error.noticeRange
-          },
-          error: {
-            is_on: this.notice.error.switch,
-            threshold: this.notice.error.threshold,
-            notice_device: this.notice.error.noticeRange
-          }
-        },
+        latitude: this.form.latitude,
+        longitude: this.form.longitude,
         remark: this.remark
       }
+      console.log(data)
       AddShop(data).then(() => {
           // 成功后跳转首页
           this.$message({

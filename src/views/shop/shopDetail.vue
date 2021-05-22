@@ -4,7 +4,7 @@
       <el-col class="info-col" :span="12">
         <h2>基本信息</h2>
         <shop-info-list :shop-id="shopId"/>
-        <point-map class="point-map"/>
+        <point-map :shop-id="shopId" class="point-map"/>
       </el-col>
       <el-col :span="12">
         <h2>店铺内监控</h2>
@@ -21,6 +21,7 @@ import ShopInfoList from '@/components/list/ShopInfoList'
 import PointMap from '@/components/map/PointMap'
 import DevicePlayerForm from '@/components/form/DevicePlayerForm'
 import ShopAlarmTable from '@/components/table/ShopAlarmTable'
+import { ShopPos } from '@/api/shop'
 
 export default {
   name: 'shopDetail',

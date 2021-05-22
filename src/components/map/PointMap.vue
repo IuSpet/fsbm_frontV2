@@ -2,9 +2,9 @@
   <div class="map-container">
     <baidu-map
       class="bm-view"
-      center="北京"
+      :center="pos"
       :ak="ak"
-      :zoom="15"
+      :zoom="14"
       :map-style="mapStyle"
       :scroll-wheel-zoom="true"
       :map-click="false"
@@ -17,6 +17,7 @@
 <script>
 import BaiduMap from 'vue-baidu-map/components/map/Map'
 import BmMarker from 'vue-baidu-map/components/overlays/Marker'
+import { ShopPos } from '@/api/shop'
 
 export default {
   name: 'PointMap',
@@ -25,16 +26,12 @@ export default {
     BmMarker
   },
   props: {
-    pos: {
-      type: Object,
-      default: () => {
-        return {
-          lng: 0,
-          lat: 0
-        }
-      }
+    shopId: {
+      type: Number,
+      default: -1
     }
   },
+
   data() {
     return {
       ak: 'dZ76X6chZrtpTrtoPakDawZv9rIp4hHm',
@@ -48,6 +45,27 @@ export default {
             }
           }
         ]
+      },
+      pos:{
+        lat:0,
+        lng:0
+      }
+    }
+  },
+ created() {
+    this.queryPos()
+  },
+  methods: {
+    queryPos() {
+      if (this.shopId !== -1) {
+        const data = {
+          shop_id: this.shopId
+        }
+        ShopPos(data).then(rsp => {
+          const { data } = rsp
+          console.log(data)
+          this.pos = data
+        })
       }
     }
   }
