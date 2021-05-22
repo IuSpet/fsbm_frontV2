@@ -31,12 +31,12 @@
           {{ scope.row.addr }}
         </template>
       </el-table-column>
-      <el-table-column label="报警内容" prop="AlarmContent" width="150" align="center" sortable="custom">
+      <el-table-column label="报警内容" prop="AlarmType" width="150" align="center" sortable="custom">
         <template slot-scope="scope">
           {{ scope.row.alarm_content }}
         </template>
       </el-table-column>
-      <el-table-column label="报警时间" prop="CreatedAt" width="175" align="center" sortable="custom">
+      <el-table-column label="报警时间" prop="AlarmAt" width="175" align="center" sortable="custom">
         <template slot-scope="scope">
           {{ scope.row.alarm_at }}
         </template>

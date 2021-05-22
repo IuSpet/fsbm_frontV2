@@ -38,6 +38,7 @@ router.beforeEach(async(to, from, next) => {
         next()
       } else {
         try {
+          console.log('401')
           next('/401')
         } catch (error) {
           // remove token and go to login page to re-login

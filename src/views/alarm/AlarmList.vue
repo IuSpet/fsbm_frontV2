@@ -58,7 +58,7 @@ export default {
       this.queryData()
     },
     handleSortChange(sortFields) {
-      this.form = sortFields
+      this.sortFields = sortFields
       this.queryData()
     },
     handleCurrentChange(current) {

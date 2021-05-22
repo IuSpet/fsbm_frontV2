@@ -54,22 +54,7 @@ export default {
         ]
       },
       show: false,
-      shop1: {
-        lng: 116.404,
-        lat: 39.915
-      },
-      shopList: [{
-        id: 0,
-        name: 'abcd',
-        manager: 'efgh',
-        phone: '123456',
-        alarm_cnt: '3',
-        pos: {
-          lng: 116.424,
-          lat: 39.915
-        },
-        show: false
-      }]
+      shopList: []
     }
   },
   created() {

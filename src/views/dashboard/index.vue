@@ -42,7 +42,7 @@ export default {
         this.cardData.recordCnt = data['record_cnt']
         this.cardData.alarmCnt = data['alarm_cnt']
         this.cardData.latestRecord = data['latest_record']
-        this.cardData.passRate = data['pass_rate'] * 100 + '%'
+        this.cardData.passRate = data['shop_pass_rate'] * 100 + '%'
       })
     }
   },
