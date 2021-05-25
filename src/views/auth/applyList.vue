@@ -19,6 +19,7 @@
       :visible.sync="reviewOrder"
       direction="rtl"
       ref="drawer"
+      style="padding: 10px"
     >
       <div class="review-drawer">
         <apply-role-list :info="adjustRow"/>
@@ -34,8 +35,8 @@ import ApplyRoleTable from '@/components/table/ApplyRoleTable'
 import TableBottom from '@/components/tool/TableBottom'
 import ReviewRoleForm from '@/components/form/ReviewRoleForm'
 import ApplyRoleList from '@/components/list/ApplyRoleList'
-import { DateFormat, DownloadCsvFile } from '@/utils'
-import { ApplyOrderList, ApplyOrderListCsv, ReviewOrder } from '@/api/auth'
+import {DateFormat, DownloadCsvFile} from '@/utils'
+import {ApplyOrderList, ApplyOrderListCsv, ReviewOrder} from '@/api/auth'
 
 export default {
   name: 'applyList',
@@ -95,7 +96,7 @@ export default {
      */
     execQuery(data) {
       ApplyOrderList(data).then(rsp => {
-        const { data } = rsp
+        const {data} = rsp
         this.tableData = data['list']
         this.totalCnt = data['total_cnt']
       }).catch(err => {
@@ -198,7 +199,7 @@ export default {
         pageSize: this.pageSize,
         sort_fields: this.sortFields
       }
-      this.$router.push({ name: 'ApplyTablePdf', params: { form: JSON.stringify(data) } })
+      this.$router.push({name: 'ApplyTablePdf', params: {form: JSON.stringify(data)}})
     }
   }
 }

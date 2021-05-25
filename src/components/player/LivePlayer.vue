@@ -46,11 +46,11 @@ export default {
     if (this.videoSrc === '') {
       switch (this.videoType) {
         case 'flv':
-          this.src = '//sf1-cdn-tos.huoshanstatic.com/obj/media-fe/xgplayer_doc_video/flv/xgplayer-demo-360p.flv'
+          // this.src = '//sf1-cdn-tos.huoshanstatic.com/obj/media-fe/xgplayer_doc_video/flv/xgplayer-demo-360p.flv'
           break
         default:
         case 'hls':
-          this.src = '//sf1-cdn-tos.huoshanstatic.com/obj/media-fe/xgplayer_doc_video/hls/xgplayer-demo.m3u8'
+          // this.src = '//sf1-cdn-tos.huoshanstatic.com/obj/media-fe/xgplayer_doc_video/hls/xgplayer-demo.m3u8'
       }
     }
   },

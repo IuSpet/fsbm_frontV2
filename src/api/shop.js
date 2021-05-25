@@ -105,3 +105,12 @@ export function ShopPos(data) {
   })
 }
 
+export function ShopDeviceList(data) {
+  return request({
+    method: 'post',
+    url: Url.shop.shopDeviceList,
+    data
+  })
+}
+
+

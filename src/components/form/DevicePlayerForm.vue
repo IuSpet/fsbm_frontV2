@@ -1,17 +1,24 @@
 <template>
   <div class="device-player-form-container">
-    <el-autocomplete
-      v-model="deviceName"
-      :fetch-suggestions="shopDeviceFilter"
+    <el-select
+      v-model="deviceId"
+      filterable
       placeholder="选择直播监控"
-      @select="handleSelect"
-    />
-    <live-player player-id="device_player" :video-type="videoType" :player-src="videoSrc"/>
+      style="margin-bottom: 5px">
+      <el-option
+        v-for="item in deviceList"
+        :key="item.id"
+        :label="item.monitor_name"
+        :value="item.id">
+      </el-option>
+    </el-select>
+    <live-player :key="playerKey" player-id="device_player" :video-type="videoType" :video-src="videoSrc"/>
   </div>
 </template>
 
 <script>
 import LivePlayer from '@/components/player/LivePlayer'
+import {ShopDeviceList} from "@/api/shop";
 
 export default {
   name: 'DevicePlayerForm',
@@ -29,19 +36,37 @@ export default {
       deviceList: [],
       videoType: 'hls',
       videoSrc: '',
-      deviceName: ''
+      deviceName: '',
+      deviceId: null,
+      playerKey: -1,
     }
   },
   created() {
     if (!this.shopId) {
-      this.deviceList = []
       return
     }
     this.queryShopDevice()
   },
+  watch: {
+    deviceId() {
+      for (let device of this.deviceList) {
+        if (device.id === this.deviceId) {
+          this.videoType = device.video_type
+          this.videoSrc = device.video_src
+          this.playerKey = device.id
+        }
+      }
+    }
+  },
   methods: {
     queryShopDevice() {
-      //todo:查询店铺监控列表
+      const data = {
+        shop_id: this.shopId
+      }
+      ShopDeviceList(data).then(rsp => {
+        const {data} = rsp
+        this.deviceList = data['list']
+      })
     },
     /**
      * 根据输入内容筛选选择
