@@ -8,6 +8,7 @@
       :map-style="mapStyle"
       :scroll-wheel-zoom="true"
       :map-click="false"
+      :key="uniqKey"
     >
       <bm-marker :position="pos"/>
     </baidu-map>
@@ -17,7 +18,7 @@
 <script>
 import BaiduMap from 'vue-baidu-map/components/map/Map'
 import BmMarker from 'vue-baidu-map/components/overlays/Marker'
-import { ShopPos } from '@/api/shop'
+import {ShopPos} from '@/api/shop'
 
 export default {
   name: 'PointMap',
@@ -46,14 +47,19 @@ export default {
           }
         ]
       },
-      pos:{
-        lat:0,
-        lng:0
+      pos: {
+        lng: 30,
+        lat: 104,
       }
     }
   },
- created() {
+  created() {
     this.queryPos()
+  },
+  computed: {
+    uniqKey() {
+      return this.pos.lat + 'and' + this.pos.lng
+    }
   },
   methods: {
     queryPos() {
@@ -62,7 +68,7 @@ export default {
           shop_id: this.shopId
         }
         ShopPos(data).then(rsp => {
-          const { data } = rsp
+          const {data} = rsp
           console.log(data)
           this.pos = data
         })

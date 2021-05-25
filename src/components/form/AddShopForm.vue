@@ -17,8 +17,8 @@
         />
       </el-form-item>
       <el-form-item label="经纬度" prop="pos">
-        <el-input v-model="form.latitude" placeholder="经度" style="width: 120px; margin-right: 10px"/>
-        <el-input v-model="form.longitude" placeholder="纬度" style="width: 120px"/>
+        <el-input v-model="form.latitude" placeholder="纬度" style="width: 120px; margin-right: 10px"/>
+        <el-input v-model="form.longitude" placeholder="经度" style="width: 120px"/>
       </el-form-item>
       <el-form-item label="备注">
         <el-input
@@ -37,8 +37,8 @@
 </template>
 
 <script>
-import { AddShop } from '@/api/shop'
-import { validEmailAddr } from '@/utils/validate'
+import {AddShop} from '@/api/shop'
+import {validEmailAddr} from '@/utils/validate'
 
 export default {
   name: 'AddShopForm',
@@ -81,19 +81,19 @@ export default {
           noticeRange: [0, 1, 2]
         }
       },
-      props: { multiple: true },
+      props: {multiple: true},
       options: [
-        { value: 0, label: '邮件' },
-        { value: 1, label: '公众号' },
-        { value: 2, label: '短信' }
+        {value: 0, label: '邮件'},
+        {value: 1, label: '公众号'},
+        {value: 2, label: '短信'}
       ],
       infoTip: '普通报警最短间隔1小时报警一次',
       warnTip: '危险报警最短间隔15分钟报警一次',
       errorTip: '严重报警最短间隔1分钟报警一次',
       addRules: {
-        name: [{ required: true, trigger: 'blur', message: '请输入店铺名称' }],
-        addr: [{ required: true, trigger: 'blur', message: '请输入店铺地址' }],
-        pos: [{ required: true, trigger: 'blur', validator: validatePos }]
+        name: [{required: true, trigger: 'blur', message: '请输入店铺名称'}],
+        addr: [{required: true, trigger: 'blur', message: '请输入店铺地址'}],
+        pos: [{required: true, trigger: 'blur', validator: validatePos}]
       }
     }
   },

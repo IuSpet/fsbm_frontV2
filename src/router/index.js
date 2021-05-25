@@ -196,7 +196,7 @@ export const constantRoutes = [
     component: Layout,
     children: [
       {
-        path: '/index',
+        path: '/profile',
         component: () => import('@/views/profile/index'),
         name: 'Profile',
         meta: { title: '用户资料', icon: 'profile' }
